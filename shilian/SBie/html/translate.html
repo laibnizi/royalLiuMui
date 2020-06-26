@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	</head>
+
+	<body>
+		<div class="translate-content">
+			<div class="translate-original-text">
+				<textarea name="" rows="" cols=""  id="sourceTextarea"></textarea>
+			</div>
+			<div class="translate-type">
+				<div class="flex-box">
+					<div  class="selsect"  id="selsectCN">英文</div>
+					<button id="translateBtn">翻译</button>
+				</div>
+			</div>
+			<div class="translate-result">
+				<textarea name="" rows="" cols=""   id="translateResultTextarea"></textarea>
+			</div>
+		</div>
+		
+		<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
+		    <ul class="mui-table-view"  id="cnTab">
+		      <li class="mui-table-view-cell">
+		        <a href="#">中文</a>
+		      </li>
+		      <li class="mui-table-view-cell">
+		        <a href="#">日文</a>
+		      </li>
+		      <li class="mui-table-view-cell">
+		        <a href="#">英文</a>
+		      </li>
+		      <li class="mui-table-view-cell">
+		        <a href="#">韩文</a>
+		      </li>
+		      <li class="mui-table-view-cell">
+		        <a href="#">法文</a>
+		      </li>
+		       <li class="mui-table-view-cell">
+		        <a href="#">俄文</a>
+		      </li>
+		       <li class="mui-table-view-cell">
+		        <a href="#">葡萄牙文</a>
+		      </li>
+		       <li class="mui-table-view-cell">
+		        <a href="#">西班牙文</a>
+		      </li>
+		       <li class="mui-table-view-cell">
+		        	<a href="#">越南文</a>
+		      </li>
+		    </ul>
+		    <!-- 取消菜单 -->
+		    <ul class="mui-table-view">
+		      <li class="mui-table-view-cell">
+		        <a href="#sheet1"><b>取消</b></a>
+		      </li>
+		    </ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/Constants.js" ></script>
+		<script type="text/javascript" src="../js/md5.js" ></script>
+		<script type="text/javascript" src="../js/main.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				var htmlFontSize=plus.storage.getItem("htmlFontSize");
+				document.getElementsByTagName("html")[0].style.fontSize=htmlFontSize;
+				var self=plus.webview.currentWebview();
+				var text=self.text;
+				if(text){
+					document.getElementById("sourceTextarea").value=text;
+					if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_UNKNOW ||plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+						plus.nativeUI.toast("网络异常");
+					}else{
+						var data=translate(text);
+						if(data.errorCode*1==0){
+							var translation=data.translation;
+							document.getElementById("translateResultTextarea").value=translation;
+						}else{
+							plus.nativeUI.toast("翻译失败");
+						}
+					}
+				}
+			});
+			
+			document.getElementById("selsectCN").addEventListener("tap",function(){
+				mui('#sheet1').popover('toggle');
+			});
+			
+			
+			mui("#cnTab").on("tap","li .mui-active",function(){
+				document.getElementById("selsectCN").innerHTML=this.innerHTML;
+				mui('#sheet1').popover('toggle');
+			});
+			
+			
+			document.getElementById("translateBtn").addEventListener("tap",function(){
+				var sourceText=document.getElementById("sourceTextarea").value;
+				var toCoding=document.getElementById("selsectCN").innerHTML;
+				if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_UNKNOW ||plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+					plus.nativeUI.toast("网络异常");
+				}else{
+					var data=translate(sourceText,toCoding);
+					if(data.errorCode*1==0){
+						var translation=data.translation;
+						document.getElementById("translateResultTextarea").value=translation;
+					}else{
+						plus.nativeUI.toast("翻译失败");
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>

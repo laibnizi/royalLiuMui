@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css" />
+
+		
+		
+		<style>
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			/*	background-color: mediumturquoise;*/
+				background-image: url(img/16010.jpg);
+				color: whitesmoke;
+				/*zuolan*/
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background:url(img/33.jpg);
+			
+				/*左边小榄的方块*/
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item,
+			.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item.mui-active {
+				border-bottom: 0px solid #c8c7cc
+			}
+			
+		</style>
+		<script>
+			plus.webview.currentWebview().setStyle({
+				scrollIndicator: 'none'
+			});
+		</script>
+		<style type="text/css">
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			p img {
+				max-width: 30%;
+				height: auto;
+			}
+			
+			.imgs-4 {
+				width: 4.7rem;
+				height: 5.6rem;
+				margin: 5px 1.5px;
+				border-radius: 8px;
+			}
+			
+			.mui-category-img {
+				margin-top: 10px;
+				border-radius: 5px;
+				box-shadow: darkcyan -0.3px 2px 0px 0.8px;
+			}
+			#www{
+				color:lightseagreen;
+			}
+			#pp{
+			/*	background-image: url(img/1611.jpg);*/
+			background:deeppink;
+			}
+		#bb{
+			color: white;
+		}
+		.mui-grid-view{
+			background-image: url(img/16010.jpg);
+		}
+				
+		</style>
+	</head>
+	<link rel="stylesheet" href="Wcss/musicAuto.css" />
+
+	<script type="text/javascript" src="Wjs/jquery.js"></script>
+
+	<body>
+		<link rel="stylesheet" href="html/gunDong.css" />
+		<header class="mui-bar mui-bar-nav" style="background-image: url(img/1611.jpg);">
+			<a class=" mui-icon  mui-pull-left" style="color: deeppink;">❤♪♥♬☺ღ✌♡</a>
+			<h1 class="mui-title">
+		    	
+		  	<div class="box">  
+    <p class="animate">  
+      我 把爱铺成蓝天
+让不安的你 一抬头就看得见
+我 把心烧成火焰
+让怕黑的你 拥着温暖入眠
+我晓得 时间如雪
+有时候会覆盖一切
+但是真爱
+一如倔强会重生的绿叶
+    </p>  
+</div>  
+  </h1>
+		</header>
+		<div class="video_exist play_yinfu" id="audio_btn" style="display: block;z-index:999999;background-color:deepskyblue;">
+			<div id="yinfu" class="rotate"></div>
+			<audio preload="auto" autoplay="" id="media" src="music/media/an.mp3" autoplay preload loop="loop"></audio>
+		</div>
+		<div class="mui-content mui-row mui-fullscreen">
+			<div class="mui-col-xs-3">
+				<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+					<a class="mui-control-item" href="#category1">祝</a>
+					<a class="mui-control-item" href="#category2">笨蛋</a>
+					<a class="mui-control-item" href="#category3">女神</a>
+					<a class="mui-control-item" href="#category4" style="color:deeppink;font-size: 25px;">生</a>
+					<a class="mui-control-item" href="#category5" style="color: deeppink;font-size: 25px;">日</a>
+					<a class="mui-control-item" href="#category6" style="color: deeppink;font-size: 25px;">快</a>
+					<a class="mui-control-item" href="#category7" style="color: deeppink;font-size: 25px;">乐</a>
+					<a class="mui-control-item" href="#category8">数岁</a>
+					<a class="mui-control-item" href="#category9">笨蛋</a>
+
+				</div>
+			</div>
+			<div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
+
+				<div id="category1" class="mui-control-content mui-active" >
+					<ul class="mui-table-view mui-grid-view" style="background-image:url(img/1611.jpg);">
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="N1">
+								<img class="mui-media-object mui-category-img" src="imgws/langman.png">
+								<div class="mui-media-body" id="www">笨蛋刘</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="XF">
+								<img class="mui-media-object mui-category-img" src="imgws/android.png">
+								<div class="mui-media-body" id="www">心房问岁</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="xuehua">
+								<img class="mui-media-object mui-category-img" src="imgws/snowflake.png">
+								<div class="mui-media-body" id="www">天上纯粹</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="rb">
+								<img class="mui-media-object mui-category-img" src="imgws/XInD.png">
+								<div class="mui-media-body" id="www">心动已准</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="qy">
+								<img class="mui-media-object mui-category-img" src="imgws/logo-angular.png">
+								<div class="mui-media-body" id="www">你是千言</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="mque">
+								<img class="mui-media-object mui-category-img" src="imgws/VIP_paiban.png">
+								<div class="mui-media-body" id="www">我的女王</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="telephone">
+								<img class="mui-media-object mui-category-img" src="imgws/medrt.png">
+								<div class="mui-media-body" id="www">为你疗伤</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="liux">
+								<img class="mui-media-object mui-category-img" src="imgws/YT.png">
+								<div class="mui-media-body" id="www">许愿流星</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="yx">
+								<img class="mui-media-object mui-category-img" src="imgws/39.png">
+								<div class="mui-media-body" id="www">唯一心向</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="jh">
+								<img class="mui-media-object mui-category-img" src="imgws/PT.png">
+								<div class="mui-media-body" id="www">紫金爱人</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="wy">
+								<img class="mui-media-object mui-category-img" src="imgws/anchor.png">
+								<div class="mui-media-body" id="www">陪你远航</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="biao">
+								<img class="mui-media-object mui-category-img" src="imgws/logo-playstation.png">
+								<div class="mui-media-body" id="www">最亮的心</div>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+				<div id="category2" class="mui-control-content">
+					<ul class="mui-table-view mui-grid-view" id="pp">
+						<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="img/16.jpg">
+								<div class="mui-media-body" id="bb">让眼睛讲彼此立场</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="img/11.jpg">
+								<div class="mui-media-body" id="bb">我不是该说些什么</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="img/13.jpg">
+								<div class="mui-media-body" id="bb">一瞬间太多东西要讲</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="img/17.jpg">
+								<div class="mui-media-body" id="bb">原来全是你 令我的思忆漫长</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="img/70.jpg">
+								<div class="mui-media-body" id="bb">你就是我最美的期待</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="img/71.jpg">
+								<div class="mui-media-body" id="bb">羞答答的玫瑰静悄悄的开</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-12 mui-col-sm-12">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="img/73.jpg">
+								<div class="mui-media-body"id="bb">宁愿用这一生等你发现</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div id="category3" class="mui-control-content" style="background:palevioletred;">
+					<div class="mui-content-padded">
+						<!--	<p>这是图片放大预览示例，点击如下图片体验全屏预览功能</p>
+						<p>-->
+						<img class="imgs-4" src="img/13.jpg" data-preview-src="" data-preview-group="2" />
+
+						<img class="imgs-4" src="img/53.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/54.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/55.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/17.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/56.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/37.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/57.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/58.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/67.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/49.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/31.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/25.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/68.jpg" data-preview-src="" data-preview-group="2" />
+						<img class="imgs-4" src="img/64.jpg" data-preview-src="" data-preview-group="2" />
+
+						<p>最求美好没有错，而选择却是会错的 </p>
+
+					</div>
+				</div>
+
+				<div id="category4" class="mui-control-content" style="background-image: url(img/160.jpg);">
+					<div style="margin-top: 100px;font-size: 200px;color:hotpink;margin-left: 40px;font-family:'blackadder itc';">生</div>
+				</div>
+				<div id="category5" class="mui-control-content" style="background-image: url(img/1601.jpg);">
+					<div style="margin-top: 340px;font-size: 200px;color: darkturquoise;font-family: '微软雅黑';margin-left: 40px;">日</div>
+				</div>
+				<div id="category6" class="mui-control-content" style="background-image: url(img/16010.jpg);">
+					<div style="margin-top: 330px;font-size: 200px;color: #009ABB;font-family: '微软雅黑';margin-left: 40px;">快</div>
+				</div>
+				<div id="category7" class="mui-control-content" style="background-image: url(img/1611.jpg);">
+					<div style="margin-top: 340px;font-size: 200px;color: blueviolet;font-family: '微软雅黑';margin-left: 40px;">乐</div>
+				</div>
+				<div id="category8" class="mui-control-content">
+					<!--/////////////////////////////-->
+
+					<style type="text/css">
+						* {
+							margin: 0px;
+						}
+						
+						canvas {
+							display: block;
+						}
+					</style>
+
+					<div style="text-align:center;clear:both;">
+
+					</div>
+					<canvas id="canvas"></canvas>
+
+					<script type="text/javascript" src="Wjs/shusui.js"></script>
+				</div>
+				<!--//////9////-->
+				<div id="category9" class="mui-control-content ">
+					<ul class="mui-table-view mui-grid-view">
+
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="fg">
+								<img class="mui-media-object mui-category-img" src="imgws/grin-hearts.png">
+								<div class="mui-media-body" id="bb">身材计算</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="ts">
+								<img class="mui-media-object mui-category-img" src="imgws/logo-ionitron.png">
+								<div class="mui-media-body" id="bb">翻译</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="bphone">
+								<img class="mui-media-object mui-category-img" src="imgws/feather-alt.png">
+								<div class="mui-media-body" id="bb">手机归属</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="devs">
+								<img class="mui-media-object mui-category-img" src="imgws/fangzheng_1193384_easyiconnet.png">
+								<div class="mui-media-body" id="bb">设备信息</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="ident">
+								<img class="mui-media-object mui-category-img" src="imgws/drupal.png">
+								<div class="mui-media-body" id="bb">身份归属</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="IPC">
+								<img class="mui-media-object mui-category-img" src="imgws/gitlab.png">
+								<div class="mui-media-body" id="bb">IP查询</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="banke">
+								<img class="mui-media-object mui-category-img" src="imgws/superpowers.png">
+								<div class="mui-media-body" id="bb">银行汇率</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="bk">
+								<img class="mui-media-object mui-category-img" src="imgws/watch-2.png">
+								<div class="mui-media-body" id="bb">银行查询</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="lshe">
+								<img class="mui-media-object mui-category-img" src="imgws/OK.png">
+								<div class="mui-media-body" id="bb">你男神</div>
+							</a>
+						</li>
+						
+
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#" id="wziq">
+								<img class="mui-media-object mui-category-img" src="imgws/gg-circle.png">
+								<div class="mui-media-body" id="bb">五子棋</div>
+							</a>
+						</li>
+
+<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" id="telephone">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="imgws/PH.png">
+								<div class="mui-media-body" id="bb">我在</div>
+							</a>
+						</li>
+
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+							<a href="#">
+								<img class="mui-media-object mui-category-img" src="imgws/f.png">
+								<div class="mui-media-body" id="bb">手心蝴蝶</div>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+
+			</div>
+			<!--////-->
+		</div>
+		</div>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+
+			var controls = document.getElementById("segmentedControls");
+			var contents = document.getElementById("segmentedControlContents");
+
+			controls.querySelector('.mui-control-item').classList.add('mui-active');
+			contents.querySelector('.mui-control-content').classList.add('mui-active');
+		</script>
+
+		<script type="text/javascript" src="Wjs/mui.previewimage.js"></script>
+		<script type="text/javascript" src="Wjs/mui.zoom.js"></script>
+		<script>
+			mui.previewImage();
+		</script>
+		<script type="text/javascript" src="js/tiaoz.js"></script>
+	</body>
+	<script type="text/javascript" src="Wjs/musicAuto.js"></script>
+	<script type="text/javascript">
+		document.getElementById("telephone").addEventListener("tap", function() {
+			var btnArray = ['拨打', '取消'];
+			var phone = "13662107089";
+			mui.confirm('是否想我' + phone + '了', '提示', btnArray, function(e) {
+				if(e.index == 0) {
+					plus.device.dial(phone, false);
+				}
+			});
+		});
+	</script>
+
+</html>

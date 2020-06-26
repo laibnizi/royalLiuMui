@@ -1,0 +1,393 @@
+{
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"html/tab-webview-subpage-about.html",
+			"fonts/mui.ttf",
+			"fonts/iconfont.ttf",
+			"js/util.js",
+			"html/tab-webview-subpage-chat.html",
+			"html/sub2.html",
+			"html/imgs/005.jpg",
+			"html/cssd/bootstrap.min.css",
+			"html/js/jquery.bootstrap.newsbox.min.js",
+			"html/cssd/bootstrap-theme.min.css",
+			"css/mui.css",
+			"html/cssd/default.css",
+			"html/cssd/normalize.css",
+			"html/cssd/site.css",
+			"img/36.jpg",
+			"img/34.jpg",
+			"img/38.jpg",
+			"sub2.html"
+		],
+		"refer": [
+			"html/tab-webview-subpage-setting.html",
+			"html/tab-webview-subpage-chat.html",
+			"html/tab-webview-subpage-contact.html",
+			"html/tab-webview-subpage-about.html",
+			"html/new-webview.html",
+			"html/menu.html",
+			"html/scan.html",
+			"html/sosopic.html",
+			"html/QQmuisc.html",
+			"html/sub2.html",
+			"html/tab-top-webview-main.html",
+			"html/city.html",
+			"html/tam.html",
+			"html/ZX.html",
+			"html/video-js/tam.html",
+			"html/CityL.html",
+			"html/gugongshow.html",
+			"html/meishishow.html",
+			"html/map.html",
+			"html/Logoin/index.html",
+			"sub3.html",
+			"Begin.html",
+			"Login.html",
+			"sub2.html",
+			"sub3-page/quanPingG.html",
+			"mmm.html",
+			"SBie/index.html",
+			"html/liulian.html",
+			"html/qinghai.html",
+			"Loogin.html",
+			"mM.html",
+			"html/meigui.html",
+			"html/xixix.html",
+			"news/index.html"
+		]
+	},
+	"launch.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"html/tab-webview-subpage-about.html"
+		],
+		"refer": [
+			"html/tab-webview-subpage-setting.html",
+			"html/tab-webview-subpage-chat.html",
+			"html/tab-webview-subpage-contact.html",
+			"html/tab-webview-subpage-about.html"
+		]
+	},
+	"html/tab-webview-subpage-setting.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/mui.min.js"
+		],
+		"refer": []
+	},
+	"html/tab-webview-subpage-about.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"js/util.js"
+		],
+		"refer": []
+	},
+	"html/tab-webview-subpage-chat.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"html/tab-webview-subpage-contact.html": {
+		"resources": [
+			"images/60x60.gif",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"html/new-webview.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"html/LUPi.html",
+			"html/Video5/index.html",
+			"html/xin.html",
+			"html/KKK.html",
+			"html/XingKONG.html",
+			"html/zuoyou.html",
+			"html/qianbao.html",
+			"html/wenzi.html",
+			"html/fabu.html",
+			"html/Dyou.html"
+		]
+	},
+	"html/sosopic.html": {
+		"refer": [
+			"index.html"
+		],
+		"resources": []
+	},
+	"html/sub2.html": {
+		"refer": [
+			"html/CityL.html",
+			"html/YouJi.html",
+			"html/Dyou.html",
+			"html/music/Kugou.html",
+			"html/Caidan.html",
+			"html/iChoseCity.html",
+			"html/beijing.html",
+			"html/city.html",
+			"music/Kugou.html"
+		],
+		"resources": []
+	},
+	"html/CityL.html": {
+		"resources": [
+			"html/bb.html",
+			"js/mui.min.js",
+			"js/webviewGroup.js"
+		],
+		"refer": [
+			"html/bb.html",
+			"html/Fz.html"
+		]
+	},
+	"html/tab-top-webview-main.html": {
+		"resources": [
+			"html/CityL.html"
+		],
+		"refer": [
+			"html/CityL.html"
+		]
+	},
+	"html/YouJi.html": {
+		"refer": [
+			"html/article.html",
+			"html/WYouJi.html"
+		],
+		"resources": []
+	},
+	"html/menu.html": {
+		"refer": [
+			"html/tripLogo/index.html",
+			"html/LuChi.html",
+			"html/MenuSharesub.html",
+			"html/uploader.html",
+			"html/Logoin/index.html",
+			"html/searchtelephone.html"
+		],
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"html/tripLogo/index.html": {
+		"refer": [
+			"html/tripLogo/index1.html"
+		],
+		"resources": []
+	},
+	"html/Logoin/index.html": {
+		"refer": [
+			"html/Logoin/index1.html",
+			"html/Logoin/city.html",
+			"index.html"
+		],
+		"resources": []
+	},
+	"html/beijing.html": {
+		"refer": [
+			"html/meishi.html"
+		],
+		"resources": []
+	},
+	"html/meishi.html": {
+		"refer": [
+			"html/beijing.html"
+		],
+		"resources": []
+	},
+	"html/Caidan.html": {
+		"refer": [
+			"html/localhost.html",
+			"html/fabu.html",
+			"html/List.html",
+			"html/Lshe.html"
+		],
+		"resources": []
+	},
+	"html/music/Kugou.html": {
+		"resources": [
+			"js/mui.min.js",
+			"js/jquery-1.11.3.js",
+			"html/music/media/\u001c��4�.mp3",
+			"html/music/media/R).mp3",
+			"html/music/media/�:\u000e�.mp3",
+			"html/music/media/,.mp3",
+			"html/music/media/O1.mp3",
+			"html/music/media/\u0000��\u001f�.mp3"
+		],
+		"refer": []
+	},
+	"html/Logoin/city.html": {
+		"refer": [
+			"html/Logoin/index.html"
+		],
+		"resources": []
+	},
+	"Begin.html": {
+		"refer": [
+			"index.html",
+			"Login.html"
+		]
+	},
+	"Login.html": {
+		"refer": [
+			"Begin.html",
+			"index.html"
+		]
+	},
+	"BiaoZ.html": {
+		"resources": [
+			"imgws/)\n.mp3"
+		]
+	},
+	"login.html": {
+		"refer": [
+			"index.html",
+			"unlock.html",
+			"main.html"
+		]
+	},
+	"main.html": {
+		"refer": [
+			"html/menu.html",
+			"html/new-webview.html",
+			"sub3.html",
+			"html/sub2.html",
+			"html/ZX.html",
+			"html/meishishow.html",
+			"html/CityL.html",
+			"SBie/index.html",
+			"news/index.html",
+			"Loogin.html",
+			"sub2.html",
+			"mM.html",
+			"html/meigui.html",
+			"html/liulian.html",
+			"html/xixix.html",
+			"mmm.html",
+			"sub3-page/quanPingG.html"
+		],
+		"resources": [
+			"html/sub2.html",
+			"sub2.html"
+		]
+	},
+	"sub3.html": {
+		"resources": [
+			"imgws/\u00154C.png",
+			"imgws/浪漫.png"
+		],
+		"refer": [
+			"Lian.html",
+			"sub3-page/lunB.html",
+			"mM.html",
+			"gongju/home-translation.html",
+			"gongju/pages/home-translation.html",
+			"gongju/pages/home-figure.html",
+			"gongju/pages/home-banks.html",
+			"gongju/pages/home-belongingTo.html",
+			"gongju/pages/home-equipment.html",
+			"gongju/pages/home-identificationCard.html",
+			"gongju/pages/home-exchangeRate.html",
+			"gongju/pages/home-ip.html",
+			"robot.html",
+			"BiaoZ.html",
+			"hamer.html",
+			"fye.html",
+			"html/yixin.html",
+			"wuziqi.html",
+			"xuehuaPiao.html",
+			"yu.html",
+			"ynu.html",
+			"jinh.html",
+			"html/Lshe.html",
+			"html/WYouJi.html"
+		]
+	},
+	"SBie/index.html": {
+		"refer": [
+			"SBie/html/result.html",
+			"SBie/html/history.html"
+		]
+	},
+	"SBie/html/result.html": {
+		"refer": [
+			"SBie/html/translate.html"
+		]
+	},
+	"news/index.html": {
+		"refer": [
+			"news/pages/360news.html",
+			"news/pages/setting.html"
+		]
+	},
+	"news/pages/360news.html": {
+		"refer": [
+			"news/pages/360detail.html"
+		]
+	},
+	"Loogin.html": {
+		"refer": [
+			"main.html",
+			"index.html"
+		]
+	},
+	"music/Kugou.html": {
+		"resources": [
+			"music/media/R).mp3"
+		]
+	},
+	"sub2.html": {
+		"refer": [
+			"music/Kugou.html",
+			"html/LuChi.html",
+			"dianying/html/main-showing.html",
+			"dianying/html/main-billboard.html",
+			"zaixinli.html",
+			"html/iChoseCity.html",
+			"html/Caidan.html",
+			"html/List.html"
+		]
+	},
+	"dianying/html/main-showing.html": {
+		"refer": [
+			"dianying/html/movie-detail.html"
+		]
+	},
+	"dianying/html/main-billboard.html": {
+		"refer": [
+			"dianying/html/billboard-box.html",
+			"dianying/html/billboard-top.html"
+		]
+	},
+	"dianying/html/billboard-box.html": {
+		"refer": [
+			"dianying/html/movie-detail.html"
+		]
+	},
+	"dianying/html/billboard-top.html": {
+		"refer": [
+			"dianying/html/movie-detail.html"
+		]
+	},
+	"html/meigui.html": {
+		"resources": [
+			"Wjs/musicAuto.js",
+			"Wcss/musicAuto.css",
+			"Wjs/jquery.js"
+		]
+	}
+}

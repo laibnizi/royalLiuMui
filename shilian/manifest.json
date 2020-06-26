@@ -1,0 +1,1145 @@
+{
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "H55FF9A41",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "女神20",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "258",/*应用版本名称*/
+		"code": "83"
+	},
+	"description": "有人用心，用人用眼，害怕你受伤，希望你懂",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "Loogin.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": "http://www.dcloud.io"
+	},
+	"permissions": {
+		"Cache": {
+			"description": "管理应用缓存"
+		},
+		"Console": {
+			"description": "跟踪调试输出日志"
+		},
+		"Contacts": {
+			"description": "访问系统联系人信息"
+		},
+		"Events": {
+			"description": "应用扩展事件"
+		},
+
+		"Maps": {
+			"description": "管理地图插件"
+		},
+		"Speech": {
+			"description": "管理语音识别插件"
+		},
+		"OAuth": {}
+	},
+	"plus": {
+		"launchwebview": {
+			"bottom": "0px",
+			"background": "#fff",
+			"subNViews": [
+				{
+					"id": "tabBar",
+					"styles": {
+						"bottom": "0px",
+						"left": "0",
+						"height": "50px",
+						"width": "100%",
+						"backgroundColor": "#fff"
+					},
+					"tags": [
+						{
+							"tag": "font",
+							"id": "indexIcon",
+							"text": "\ue614",
+							"position": {
+								"top": "4px",
+								"left": "0",
+								"width": "25%",
+								"height": "24px"
+							},
+							"textStyles": {
+								"fontSrc": "_www/fon/iconfont.ttf",
+								"align": "center",
+								"size": "24px"
+							}
+						}, {
+							"tag": "font",
+							"id": "indexText",
+							"text": "女神",
+							"position": {
+								"top": "23px",
+								"left": "0",
+								"width": "25%",
+								"height": "24px"
+							},
+							"textStyles": {
+								"align": "center",
+								"size": "10px"
+							}
+						}, {
+							"tag": "fon",
+							"id": "newsIcon",
+							"text": "\ue60b",
+							"position": {
+								"top": "4px",
+								"left": "20%",
+								"width": "25%",
+								"height": "24px"
+							},
+							"textStyles": {
+								"fontSrc": "_www/fon/iconfont.ttf",
+								"align": "center",
+								"size": "24px"
+							}
+						}, {
+							"tag": "font",
+							"id": "newsText",
+							"text": "刘",
+							"position": {
+								"top": "23px",
+								"left": "20%",
+								"width": "25%",
+								"height": "24px"
+							},
+							"textStyles": {
+								"align": "center",
+								"size": "10px"
+							}
+						}, {
+							"tag": "fon",
+							"id": "contactIcon",
+							"text": "\ue6e3",
+							"position": {
+								"top": "4px",
+								"left": "55%",
+								"width": "25%",
+								"height": "24px"
+							},
+							"textStyles": {
+								"fontSrc": "_www/fon/iconfont.ttf",
+								"align": "center",
+								"size": "24px"
+							}
+						}, {
+							"tag": "fon",
+							"id": "contactText",
+							"text": "世",
+							"position": {
+								"top": "24px",
+								"left": "55%",
+								"width": "25%",
+								"height": "24px"
+							},
+							"textStyles": {
+								"align": "center",
+								"size": "10px"
+							}
+						}, {
+							"tag": "fon",
+							"id": "newwindowIcon",
+							"text": "\ue669",
+							"position": {
+								"top": "4px",
+								"left": "75%",
+								"width": "25%",
+								"height": "24px"
+							},
+							"textStyles": {
+								"fontSrc": "_www/fon/iconfont.ttf",
+								"align": "center",
+								"size": "24px"
+							}
+						}, {
+							"tag": "font",
+							"id": "newwindowText",
+							"text": "莲",
+							"position": {
+								"top": "24px",
+								"left": "75%",
+								"width": "25%",
+								"height": "24px"
+							},
+							"textStyles": {
+								"align": "center",
+								"size": "10px"
+							}
+						}, {
+							"tag": "rect",
+							"id": "tabBorder",
+							"position": {
+								"top": "0",
+								"left": "0",
+								"width": "100%",
+								"height": "1px"
+							},
+							"rectStyles": {
+								"color": "#ccc"
+							}
+						}
+					]
+				}
+			]
+		},
+		"splashscreen": {
+			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true
+		},
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.ADD_VOICEMAIL\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"]
+			},
+			"orientation": [
+				"portrait-primary",
+				"portrait-secondary"
+			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					/*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "",/*iPhone高分屏程序图标，分辨率：114x114*/
+						/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"app@2x": "unpackage/res/icons/120x120.png",
+						"app@3x": "unpackage/res/icons/180x180.png",
+						"settings@2x": "unpackage/res/icons/58x58.png",
+						"settings@3x": "unpackage/res/icons/87x87.png",
+						"spotlight@3x": "unpackage/res/icons/120x120.png",
+						"spotlight@2x": "unpackage/res/icons/80x80.png",
+						"notification@3x": "unpackage/res/icons/60x60.png",
+						"notification@2x": "unpackage/res/icons/40x40.png"
+					},
+					"ipad": {
+						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
+						 /*iPad iOS7程序图标，分辨率：76x76*/
+						 /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						/*iPad设置页面程序图标，分辨率：29x29*/
+						"app":"unpackage/res/icons/76x76.png","app@2x":"unpackage/res/icons/152x152.png","settings":"unpackage/res/icons/29x29.png","proapp@2x":"unpackage/res/icons/167x167.png","spotlight":"unpackage/res/icons/40x40.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","notification":"unpackage/res/icons/20x20.png","notification@2x":"unpackage/res/icons/40x40.png"
+					},
+					"appstore": "unpackage/res/icons/1024x1024.png"
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": "C:/Users/Administrator/Desktop/新建文件夹/1600.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "C:/Users/Administrator/Desktop/新建文件夹/1600.png",
+						"retina47": "C:/Users/Administrator/Desktop/新建文件夹/1600.png"
+					},
+					"ipad": {
+						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": ""
+					}
+				},
+				"android": {
+					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "C:/Users/Administrator/Desktop/161.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/Administrator/Desktop/161.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "C:/Users/Administrator/Desktop/161.png"
+				}
+			}
+		},
+		"ads": {
+			"rp": true,
+			"splash": true,
+			"push": true
+		},
+		"adid": ""
+	},
+	"dependencies": {
+		"pages": {
+			"main.html": {
+				"resources": [
+					"html/sub2.html",
+					"sub2.html"
+				],
+				"refer": [
+					"html/menu.html",
+					"setting.html",
+					"html/new-webview.html",
+					"sub3.html",
+					"Loogin.html",
+					"mM.html",
+					"news/index.html",
+					"html/meigui.html",
+					"html/ZX.html",
+					"SBie/index.html",
+					"html/liulian.html",
+					"html/xixix.html",
+					"mmm.html",
+					"sub3-page/quanPingG.html"
+				],
+				"priority": 0
+			},
+			"login.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"js/mui.enterfocus.js"
+				],
+				"refer": [
+					"main.html",
+					"unlock.html"
+				],
+				"priority": 0
+			},
+			"Loogin.html": {
+				"resources": [],
+				"refer": [
+					"main.html",
+					"index.html"
+				],
+				"priority": 0
+			},
+			"html/sub2.html": {
+				"resources": [],
+				"refer": [
+					"html/Caidan.html",
+					"html/music/Kugou.html",
+					"music/Kugou.html",
+					"html/iChoseCity.html"
+				],
+				"priority": 0
+			},
+			"html/Caidan.html": {
+				"resources": [],
+				"refer": [
+					"html/Lshe.html",
+					"html/List.html"
+				],
+				"priority": 0
+			},
+			"html/music/Kugou.html": {
+				"resources": [
+					"html/music/media/夜的钢琴曲五.mp3",
+					"html/music/media/恒温.mp3",
+					"html/music/media/以为明了.mp3",
+					"html/music/media/听.mp3",
+					"html/music/media/偏爱.mp3",
+					"html/music/media/最美的期待.mp3"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"music/Kugou.html": {
+				"resources": [
+					"music/media/恒温.mp3"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"sub2.html": {
+				"resources": [],
+				"refer": [
+					"music/Kugou.html",
+					"html/LuChi.html",
+					"dianying/html/main-showing.html",
+					"dianying/html/main-billboard.html",
+					"zaixinli.html",
+					"html/iChoseCity.html",
+					"html/Caidan.html",
+					"html/List.html"
+				],
+				"priority": 0
+			},
+			"sub3.html": {
+				"resources": [
+					"imgws/浪漫.png"
+				],
+				"refer": [
+					"Lian.html",
+					"sub3-page/lunB.html",
+					"mM.html",
+					"gongju/home-translation.html",
+					"gongju/pages/home-translation.html",
+					"gongju/pages/home-figure.html",
+					"gongju/pages/home-banks.html",
+					"gongju/pages/home-belongingTo.html",
+					"gongju/pages/home-equipment.html",
+					"gongju/pages/home-identificationCard.html",
+					"gongju/pages/home-exchangeRate.html",
+					"gongju/pages/home-ip.html",
+					"robot.html",
+					"BiaoZ.html",
+					"hamer.html",
+					"fye.html",
+					"html/yixin.html",
+					"wuziqi.html",
+					"xuehuaPiao.html",
+					"yu.html",
+					"ynu.html",
+					"jinh.html",
+					"html/Lshe.html",
+					"html/WYouJi.html"
+				],
+				"priority": 0
+			},
+			"news/index.html": {
+				"resources": [],
+				"refer": [
+					"news/pages/360news.html",
+					"news/pages/setting.html"
+				],
+				"priority": 0
+			},
+			"html/new-webview.html": {
+				"resources": [],
+				"refer": [
+					"html/xin.html",
+					"html/KKK.html",
+					"html/XingKONG.html",
+					"html/zuoyou.html",
+					"html/qianbao.html",
+					"html/wenzi.html",
+					"html/fabu.html",
+					"html/Dyou.html"
+				],
+				"priority": 0
+			},
+			"dianying/html/main-showing.html": {
+				"resources": [],
+				"refer": [
+					"dianying/html/movie-detail.html"
+				],
+				"priority": 0
+			},
+			"dianying/html/main-billboard.html": {
+				"resources": [],
+				"refer": [
+					"dianying/html/billboard-box.html",
+					"dianying/html/billboard-top.html"
+				],
+				"priority": 0
+			},
+			"dianying/html/billboard-box.html": {
+				"resources": [],
+				"refer": [
+					"dianying/html/movie-detail.html"
+				],
+				"priority": 0
+			},
+			"dianying/html/billboard-top.html": {
+				"resources": [],
+				"refer": [
+					"dianying/html/movie-detail.html"
+				],
+				"priority": 0
+			},
+			"index.html": {
+				"resources": [
+					"sub2.html",
+					"img/36.jpg"
+				],
+				"refer": [
+					"html/menu.html",
+					"html/new-webview.html",
+					"sub3.html",
+					"sub3-page/quanPingG.html",
+					"mmm.html",
+					"SBie/index.html",
+					"html/liulian.html",
+					"html/qinghai.html",
+					"Loogin.html",
+					"mM.html",
+					"html/sosopic.html",
+					"html/meigui.html",
+					"html/xixix.html",
+					"news/index.html",
+					"html/ZX.html"
+				],
+				"priority": 0
+			},
+			"html/meigui.html": {
+				"resources": [
+					"Wjs/musicAuto.js",
+					"Wcss/musicAuto.css",
+					"Wjs/jquery.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"news/pages/360news.html": {
+				"resources": [],
+				"refer": [
+					"news/pages/360detail.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"html/imgs/005.jpg",
+				"html/imgs/444.jpg",
+				"html/js/cityselect.js",
+				"html/video-js/lang/zh-CN.js",
+				"images/pullD.png",
+				"imgws/shizhen.png",
+				"html/video-js/video.js",
+				"html/imgs/011.jpg",
+				"html/imgs/333.jpg",
+				"imgws/joomla.png",
+				"html/Logoin/font0/demo.css",
+				"js/mui.view.js",
+				"imgws/XInD.png",
+				"html/video-js/lang/hu.js",
+				"html/imgs/8.jpg",
+				"html/Video5/js/html5video.js",
+				"Wcss/icons-extra.css",
+				"images/mingxing.png",
+				"img/27.jpg",
+				"news/pages/js/shiquan.dateUtils.js",
+				"html/imgs/jingshangongyuan.jpg",
+				"html/Logoin/font0/iconfont.eot",
+				"font/demo_unicode.html",
+				"html/localhost.html",
+				"img/66.jpg",
+				"html/imgs/qingfnegbaozipu.jpg",
+				"html/Video5/fonts/vjs.woff",
+				"html/cssd/style.css",
+				"html/imgs/012.jpg",
+				"img/51.jpg",
+				"img/64.jpg",
+				"html/imgs/2.jpg",
+				"img/46.jpg",
+				"html/Logoin/jbpic/index.html",
+				"images/youJi.png",
+				"images/biaoqingya.png",
+				"images/logo.png",
+				"videoCss/video.css",
+				"html/Logoin/layui/lay/modules/util.js",
+				"images/Daoyou.png",
+				"html/Logoin/js/mui.min.js",
+				"html/imgs/yuanmingyuan.jpg",
+				"html/music/data/hs.jpg",
+				"news/pages/js/mui.min.js",
+				"news/pages/css/feedback.css",
+				"html/Logoin/js/jquery-1.11.1.min.js",
+				"imgws/medrt.png",
+				"imgws/151375668550091372.png",
+				"images/huo.png",
+				"html/cssd/mui.imageviewer.css",
+				"SBie/js/main.js",
+				"html/video-js/lang/fr.js",
+				"html/imgs/6.jpg",
+				"html/Logoin/manifest.json",
+				"fon/demo.css",
+				"news/pages/img/detail.jpg",
+				"img/22.jpg",
+				"html/imgs/yiheyuan.jpg",
+				"imgws/grin-hearts.png",
+				"html/video-js/font/vjs.svg",
+				"imgws/OK.png",
+				"imgws/logo-angular.png",
+				"images/WaiMai.png",
+				"imgws/3.png",
+				"images/2.png",
+				"html/js/mui.imageViewer.js",
+				"imgws/strava.png",
+				"images/yingyong.png",
+				"html/Logoin/css/style.css",
+				"html/Logoin/jbpic/image/4-1.jpg",
+				"fon/iconfont.css",
+				"img/56.jpg",
+				"html/Logoin/jbpic/image/3-1.jpg",
+				"html/Video5/VideoDemo.css",
+				"html/Video5/lang/tr.js",
+				"html/video-js/lang/it.js",
+				"images/muisic.png",
+				"images/Chuang.png",
+				"SBie/fonts/mui.ttf",
+				"html/Logoin/img/logo.png",
+				"img/orientationc.png",
+				"img/49.jpg",
+				"html/Video5/lang/uk.js",
+				"images/xinging.png",
+				"img/29.jpg",
+				"html/music/js/jqmobi.js",
+				"html/video-js/lang/bg.js",
+				"img/23.jpg",
+				"html/imgs/shenchahaihuiguan.jpg",
+				"html/imgs/donglaishunfandian.jpg",
+				"html/Video5/lang/nl.js",
+				"imgws/39.png",
+				"imgws/snowflake.png",
+				"SBie/js/md5.js",
+				"html/cssd/cntl.min.css",
+				"html/uploader.html",
+				"img/72.jpg",
+				"html/Logoin/index1.html",
+				"images/XingQ.png",
+				"html/meishi.html",
+				"imgws/PT.png",
+				"html/Logoin/layui/css/modules/laydate/icon.png",
+				"html/Logoin/js/Libs/jquery.json.js",
+				"html/Logoin/js/jquery.min2.js",
+				"html/video-js/lang/es.js",
+				"Wjs/mui.previewimage.js",
+				"html/Video5/lang/cs.js",
+				"img/17.jpg",
+				"images/shalou.png",
+				"html/music/images/hoverbg.png",
+				"imgws/logo-ionitron.png",
+				"fonts/icomoon.svg",
+				"html/searchtelephone.html",
+				"html/video-js/Tianjin.mp4",
+				"img/52.jpg",
+				"news/pages/css/list-to-detail.css",
+				"images/qinghai.png",
+				"html/video-js/Shijiaz.mp4",
+				"html/scan.html",
+				"img/35.jpg",
+				"html/Logoin/layui/lay/modules/code.js",
+				"html/Logoin/js/form.js",
+				"SBie/css/iconfont.css",
+				"images/gou.png",
+				"fon/iconfont.woff",
+				"imgws/gitlab.png",
+				"fon/iconfont.ttf",
+				"news/pages/js/mui.indexedlist.js",
+				"html/imgs/010.jpg",
+				"html/imgs/666.jpg",
+				"img/68.jpg",
+				"img/30.jpg",
+				"html/Video5/js/mui.js",
+				"images/liulian.png",
+				"imgws/gH.png",
+				"images/ff.png",
+				"html/music/images/bg3.png",
+				"img/25.jpg",
+				"html/Logoin/font1/mui.ttf",
+				"news/pages/listview.html",
+				"html/Video5/ViDemo/video-js.css",
+				"html/Video5/2017123101.mp4",
+				"img/71.jpg",
+				"html/video-js/lang/vi.js",
+				"html/Logoin/fonts/fontawesome-webfont.woff2",
+				"news/pages/img/512_512.png",
+				"font/iconfont.js",
+				"html/cssd/bootstrap.min.css",
+				"news/pages/img/1024x1024.png",
+				"html/imgs/nianchao.jpg",
+				"html/music/images/Thumbs.db",
+				"html/music/media/xixi.wav",
+				"html/Logoin/img/008.jpg",
+				"imgws/151375671039447316.png",
+				"img/70.jpg",
+				"html/imgs/007.jpg",
+				"img/14.jpg",
+				"imgws/searchengin.png",
+				"html/Logoin/font1/iconfont.svg",
+				"html/cssd/feedback-page.css",
+				"js/jquery-1.11.3.js",
+				"images/com.cn.png",
+				"html/Logoin/img/011.jpg",
+				"html/Logoin/js/yanzheng.js",
+				"img/13.jpg",
+				"html/Logoin/img/tick.png",
+				"html/Logoin/img/7-8.jpg",
+				"html/imgs/7-3.jpg",
+				"img/24.jpg",
+				"html/Logoin/jbpic/js/jquery-1.11.1.min.js",
+				"js/common.js",
+				"img/add.png",
+				"html/Video5/lang/es.js",
+				"html/JavaScript/quickstart.md",
+				"images/60x60.gif",
+				"fonts/iconfont.ttf",
+				"js/mui.js",
+				"html/Logoin/js/Treatment.js",
+				"html/Logoin/layui/css/modules/layer/default/layer.css",
+				"html/video-js/font/vjs.ttf",
+				"html/music/css/index.css",
+				"html/Logoin/layui/css/modules/layer/default/loading-1.gif",
+				"html/Logoin/css/default.css",
+				"html/Logoin/img/002.jpg",
+				"html/Logoin/layui/lay/modules/layedit.js",
+				"SBie/img/logoimg.png",
+				"js/jquery-1.11.1.js",
+				"Script/prettify.js",
+				"html/Logoin/js/stopExecutionOnTimeout.js",
+				"html/video-js/lang/cs.js",
+				"html/Logoin/js/jquery-3.2.1.js",
+				"html/Logoin/layui/css/modules/layer/default/loading-0.gif",
+				"img/33.jpg",
+				"Wjs/mui.zoom.js",
+				"html/Logoin/font1/iconfont.css",
+				"html/Logoin/fonts/icomoon.eot",
+				"img/26.jpg",
+				"html/video-js/lang/uk.js",
+				"news/pages/img/splash.png",
+				"img/55.jpg",
+				"images/dataphin.png",
+				"html/Logoin/css/reset.css",
+				"html/imgs/008.jpg",
+				"html/Video5/lang/zh-CN.js",
+				"html/music/data/zwsrkl.jpg",
+				"html/Logoin/css/normalize.css",
+				"html/Logoin/img/13.jpg",
+				"imgws/gg-circle.png",
+				"Wcss/Robotstyle.css",
+				"SBie/less/main.less",
+				"html/Logoin/js/Libs/swiper-3.3.1.jquery.min.js",
+				"html/Video5/fonts/vjs.ttf",
+				"html/Video5/lang/ca.js",
+				"html/Logoin/font1/iconfont.woff",
+				"images/shuzi.png",
+				"html/video-js/lang/ar.js",
+				"img/57.jpg",
+				"html/Logoin/img/payment.jpg",
+				"html/Logoin/font1/iconfont.ttf",
+				"html/Logoin/layui/css/layui.mobile.css",
+				"img/48.jpg",
+				"images/FaB.png",
+				"sub3-page/JS/iscroll.js",
+				"images/youzi.png",
+				"html/music/data/whhhg.jpg",
+				"imgws/monero.png",
+				"html/Video5/fonts/mui.ttf",
+				"img/39.jpg",
+				"html/Logoin/layui/lay/modules/tree.js",
+				"fonts/iconfont.css",
+				"img/47.jpg",
+				"html/music/media/animals2.mp3",
+				"html/Logoin/layui/lay/modules/form.js",
+				"html/Logoin/layui/lay/modules/laypage.js",
+				"images/ma.png",
+				"html/video-js/lang/tr.js",
+				"images/Luxiang.png",
+				"images/yin.png",
+				"css/mui.min.css",
+				"html/Logoin/font0/iconfont.svg",
+				"html/Logoin/font1/demo.css",
+				"html/Logoin/img/009.jpg",
+				"html/Logoin/img/7-3.jpg",
+				"html/imgs/555.jpg",
+				"html/video-js/lang/ca.js",
+				"html/Video5/lang/pt-BR.js",
+				"img/34.jpg",
+				"news/pages/img/512x512.png",
+				"html/Logoin/img/005.jpg",
+				"html/Logoin/layui/layui.js",
+				"html/bb.html",
+				"html/video-js/lang/ko.js",
+				"html/js/arttmpl.js",
+				"html/gugongshow.html",
+				"html/Video5/fonts/vjs.svg",
+				"js/strophe-custom-2.0.0.js",
+				"html/Video5/img/3.jpg",
+				"html/Logoin/css/ModularForm.css",
+				"font/demo.css",
+				"html/music/media/ak.mp3",
+				"img/32.jpg",
+				"html/Logoin/font1/iconfont.eot",
+				"img/41.jpg",
+				"Wcss/style.css",
+				"html/Logoin/jbpic/image/3-2.jpg",
+				"html/Logoin/layui/lay/modules/element.js",
+				"js/main.js",
+				"html/Fz.html",
+				"html/js/autoComplete.js",
+				"images/AD.png",
+				"css/main.css",
+				"html/Logoin/css/demo2.css",
+				"html/Video5/index.html",
+				"html/video-js/lang/nl.js",
+				"html/Video5/ViDemo/video-js.swf",
+				"videoCss/Videomain.css",
+				"html/Logoin/layui/css/modules/laydate/laydate.css",
+				"news/pages/detail.html",
+				"img/38.jpg",
+				"html/Video5/ViDemo/video.js",
+				"html/imgs/mingshisanling.jpg",
+				"html/imgs/time.png",
+				"html/Video5/lang/ja.js",
+				"html/imgs/7-2.jpg",
+				"html/Logoin/font1/iconfont.js",
+				"imgws/feather-alt.png",
+				"SBie/fonts/iconfont.ttf",
+				"html/video-js/video-js.min.css",
+				"Wcss/imagepreview.css",
+				"img/11.jpg",
+				"html/imgs/7-8.jpg",
+				"img/20.jpg",
+				"images/bank of beijing.png",
+				"html/Logoin/fonts/icomoon.woff",
+				"images/huan.png",
+				"html/imgs/777.jpg",
+				"html/cssd/jquery.cntl.min.js",
+				"html/music/data/hnh.jpg",
+				"html/Logoin/js/bootstrap.js",
+				"images/YinYue.png",
+				"html/imgs/shuilifang.jpg",
+				"Script/hls.min.js",
+				"html/Logoin/css/swiper-3.3.1.min.css",
+				"img/62.jpg",
+				"html/Logoin/img/7-2.jpg",
+				"html/video-js/PPDao.mp4",
+				"img/18.jpg",
+				"SBie/html/translate.html",
+				"Wjs/index.js",
+				"html/imgs/5.jpg",
+				"imgws/drupal.png",
+				"images/zhibo.png",
+				"html/imgs/tonghejufandian.jpg",
+				"css/style.css",
+				"html/music/js/all.js",
+				"html/Logoin/css/styles.css",
+				"html/Logoin/city.html",
+				"html/JavaScript/jquery-1.11.1.js",
+				"html/Logoin/css/Homepage.css",
+				"html/Logoin/layui/css/modules/layer/default/loading-2.gif",
+				"Wcss/category.css",
+				"images/graphanalytics-data.png",
+				"Script/html5video.js",
+				"html/Logoin/js/demo2.js",
+				"html/article.html",
+				"html/JavaScript/easemob.im-1.0.5.js",
+				"html/Logoin/js/jquery-ui.min.js",
+				"html/video-js/video.dev.js",
+				"html/Logoin/css/font-awesome.css",
+				"news/pages/css/mui.min.css",
+				"html/CityL.html",
+				"html/music/data/yydxd.jpg",
+				"html/LUPi.html",
+				"html/imgs/gugong.jpg",
+				"images/Cemare.png",
+				"html/video-js/lang/ja.js",
+				"font/demo_fontclass.html",
+				"html/Logoin/img/puff.svg",
+				"imgws/PH.png",
+				"html/imgs/badaling.jpg",
+				"html/Video5/fonts/vjs.eot",
+				"news/pages/fonts/mui.ttf",
+				"html/imgs/moerdunniupaifang.jpg",
+				"imgws/GG.png",
+				"html/JavaScript/mui.view.js",
+				"images/TongCheng.png",
+				"html/Logoin/img/007.jpg",
+				"images/so.png",
+				"html/cssd/jquery.cntl.js",
+				"fonts/mui.ttf",
+				"html/Logoin/img/lock_icon_copy.png",
+				"Wjs/three.js",
+				"html/Logoin/img/001.jpg",
+				"fonts/glyphicons-halflings-regular.woff",
+				"html/JavaScript/feedback-page.js",
+				"images/0.png",
+				"html/Logoin/font0/iconfont.ttf",
+				"html/Logoin/font0/iconfont.js",
+				"html/Logoin/layui/css/modules/layer/default/icon-ext.png",
+				"imgws/zhenai_1193433_easyiconnet.png",
+				"imgws/fenzhen.png",
+				"html/Logoin/img/key.png",
+				"html/Logoin/index.html",
+				"Wjs/myscroll.js",
+				"js/feedback.js",
+				"fonts/glyphicons-halflings-regular.svg",
+				"fonts/glyphicons-halflings-regular.ttf",
+				"news/pages/about.html",
+				"images/WuXing.png",
+				"html/Logoin/css/font.css",
+				"html/js/mui.indexedlist.js",
+				"html/music/data/cr.jpg",
+				"html/Logoin/css/app.css",
+				"html/Logoin/jbpic/image/2-1.jpg",
+				"news/pages/img/1024_1024.png",
+				"html/video-js/font/vjs.woff",
+				"html/music/media/22.mp3",
+				"html/Video5/img/002.jpg",
+				"css/common.css",
+				"images/daxiao.png",
+				"html/Logoin/layui/lay/modules/laytpl.js",
+				"html/JavaScript/app.js",
+				"images/jiezhi.png",
+				"html/cssd/mui.indexedlist.css",
+				"news/pages/js/mui.view.js",
+				"html/js/jquery-3.2.1.js",
+				"img/73.jpg",
+				"html/Logoin/js/Particleground.js",
+				"images/Share1.png",
+				"font/iconfont.svg",
+				"images/chaoji.png",
+				"imgws/superpowers.png",
+				"html/cssd/cityselect.css",
+				"html/js/jquery.bootstrap.newsbox.min.js",
+				"html/Logoin/js/common.js",
+				"news/pages/js/shiquan.setting.js",
+				"img/58.jpg",
+				"images/GongLv.png",
+				"html/Video5/lang/ru.js",
+				"html/Logoin/font0/mui.ttf",
+				"html/JavaScript/feedback.js",
+				"html/JavaScript/strophe-custom-2.0.0.js",
+				"html/music/data/ywaq.jpg",
+				"html/imgs/004.jpg",
+				"html/cssd/bootstrap-theme.min.css",
+				"html/tam.html",
+				"html/uploader_ret.html",
+				"html/imgs/guojiadajuyuan.jpg",
+				"html/video-js/video-js.less",
+				"html/Video5/js/Luxiang.js",
+				"html/Logoin/img/7-5.jpg",
+				"html/Logoin/img/004.jpg",
+				"html/cssd/default.css",
+				"html/Logoin/font0/iconfont.woff",
+				"html/Logoin/img/7-4.jpg",
+				"img/60.jpg",
+				"images/tianxie.png",
+				"images/nuanbao.png",
+				"img/54.jpg",
+				"SBie/css/mui.css",
+				"html/music/images/fmpause.png",
+				"html/video-js/shipin.mp4",
+				"html/imgs/1000.jpg",
+				"html/Video5/lang/fr.js",
+				"html/Video5/lang/it.js",
+				"html/Logoin/css/common.css",
+				"img/67.jpg",
+				"img/40.jpg",
+				"html/video-js/tam.html",
+				"images/shijianban.png",
+				"img/63.jpg",
+				"SBie/js/mui.min.js",
+				"html/cssd/cntl.css",
+				"img/15.jpg",
+				"imgws/151375665240370100.png",
+				"html/imgs/beijinghuanlegu.jpg",
+				"js/immersed.js",
+				"html/Video5/lang/de.js",
+				"html/imgs/7.jpg",
+				"news/pages/js/mui.js",
+				"Script/doc.js",
+				"html/Logoin/css/LoginRegister.css",
+				"img/42.jpg",
+				"img/37.jpg",
+				"img/61.jpg",
+				"html/imgs/1.jpg",
+				"img/45.jpg",
+				"html/video-js/video.novtt.dev.js",
+				"html/imgs/tiantan.jpg",
+				"imgws/miH.png",
+				"font/iconfont.ttf",
+				"html/Logoin/jbpic/image/1-1.jpg",
+				"images/soso.png",
+				"news/pages/img/index.png",
+				"html/Logoin/img/7-6.jpg",
+				"html/Logoin/js/jquery.min.js",
+				"html/imgs/13.jpg",
+				"html/video-js/lang/zh-TW.js",
+				"html/imgs/4.jpg",
+				"html/Logoin/jbpic/image/2-2.jpg",
+				"html/Logoin/font0/iconfont.css",
+				"html/imgs/006.jpg",
+				"html/Video5/ViDemo/video-js.min.css",
+				"html/Video5/lang/hu.js",
+				"html/Logoin/img/user_icon_copy.png",
+				"imgws/VIP_paiban.png",
+				"html/video-js/lang/ru.js",
+				"html/Logoin/layui/lay/modules/layer.js",
+				"img/19.jpg",
+				"html/beijing.html",
+				"html/Logoin/fonts/fontawesome-webfont.woff",
+				"html/imgs/001.jpg",
+				"html/imgs/7-4.jpg",
+				"html/Logoin/img/003.jpg",
+				"images/XQ.png",
+				"html/imgs/7-7.jpg",
+				"html/meishishow.html",
+				"html/Logoin/css/loaders.css",
+				"imgws/Caom.png",
+				"images/zuanshi.png",
+				"html/music/data/qg.jpg",
+				"fonts/icomoon.ttf",
+				"fon/iconfont.eot",
+				"html/imgs/dadongkaoya.jpg",
+				"img/16.jpg",
+				"html/Logoin/layui/lay/modules/laydate.js",
+				"html/MenuSharesub.html",
+				"html/video-js/video-js.css",
+				"img/28.jpg",
+				"img/53.jpg",
+				"html/Logoin/js/Libs/jquery.min.js",
+				"js/easemob.im-1.0.5.js",
+				"images/KaBao.png",
+				"news/pages/js/feedback.js",
+				"img/orientationa.png",
+				"imgws/151375669416355455.png",
+				"images/Friend.png",
+				"imgws/fangzheng_1193384_easyiconnet.png",
+				"fonts/glyphicons-halflings-regular.eot",
+				"news/pages/js/vue.min.js",
+				"html/imgs/3.jpg",
+				"fonts/icomoon.eot",
+				"html/imgs/002.jpg",
+				"html/YouJi.html",
+				"html/map.html",
+				"html/Video5/lang/ar.js",
+				"html/Logoin/fonts/fontawesome-webfont.eot",
+				"images/aiqing.png",
+				"html/Logoin/layui/lay/modules/flow.js",
+				"img/016.jpg",
+				"html/imgs/999.jpg",
+				"html/imgs/tiananmen.jpg",
+				"img/59.jpg",
+				"html/city.html",
+				"imgws/logo-playstation.png",
+				"img/orientationbg.png",
+				"img/31.jpg",
+				"html/imgs/003.jpg",
+				"SBie/html/history.html",
+				"imgws/f.png",
+				"images/quanLv.png",
+				"html/Logoin/img/012.jpg",
+				"images/Left.png",
+				"html/imgs/7-5.jpg",
+				"html/Logoin/img/006.jpg",
+				"html/Logoin/fonts/icomoon.svg",
+				"images/shar.png",
+				"html/cssd/site.css",
+				"html/Logoin/layui/css/layui.css",
+				"SBie/js/mui.js",
+				"news/pages/img/logo.png",
+				"SBie/js/clipboard.min.js",
+				"html/Logoin/img/7-7.jpg",
+				"imgws/miaozhen.png",
+				"html/video-js/video-js.swf",
+				"images/PuDw.png",
+				"images/DiDian1.png",
+				"html/music/images/fmplay.png",
+				"font/iconfont.css",
+				"js/webviewGroup.js",
+				"html/Logoin/jbpic/image/1-2.jpg",
+				"html/cssd/normalize.css",
+				"SBie/html/result.html",
+				"images/shuxing.png",
+				"imgws/2.png",
+				"images/GoTop.png",
+				"img/50.jpg",
+				"news/pages/css/mui.css",
+				"html/JavaScript/mui.locker.js",
+				"font/iconfont.woff",
+				"news/pages/css/mui.indexedlist.css",
+				"imgws/miao.mp3",
+				"html/JavaScript/json2.js",
+				"images/eprofile-data.png",
+				"js/mui.locker.js",
+				"SBie/cs.html",
+				"html/Logoin/fonts/fontawesome-webfont.ttf",
+				"images/night.png",
+				"html/imgs/009.jpg",
+				"font/demo_symbol.html",
+				"Script/common.js",
+				"imgws/YT.png",
+				"html/Logoin/css/mui.min.css",
+				"html/Video5/js/mui.min.js",
+				"html/Video5/lang/zh-TW.js",
+				"imgws/7987.wav",
+				"html/music/data/snsyzb.jpg",
+				"images/5.png",
+				"html/Video5/js/hls.min.js",
+				"imgws/anchor.png",
+				"js/util.js",
+				"html/Logoin/layui/lay/modules/mobile.js",
+				"html/video-js/lang/de.js",
+				"html/Video5/lang/bg.js",
+				"html/Logoin/layui/lay/modules/upload.js",
+				"html/js/jquery-1.8.0.min.js",
+				"html/Video5/lang/vi.js",
+				"news/pages/img/news.jpg",
+				"css/mui.css",
+				"SBie/css/mui.min.css",
+				"img/12.jpg",
+				"html/Logoin/img/7-1.jpg",
+				"css/feedback-page.css",
+				"html/music/media/12.m4a",
+				"js/tiaoz.js",
+				"html/Logoin/layui/css/modules/code.css",
+				"html/Logoin/css/demo.css",
+				"imgws/watch-2.png",
+				"html/Logoin/img/010.jpg",
+				"html/imgs/7-1.jpg",
+				"html/video-js/font/vjs.eot",
+				"html/Logoin/js/jquery.min1.js",
+				"html/video-js/lang/pt-BR.js",
+				"img/21.jpg",
+				"Wjs/regl.min.js",
+				"font/iconfont.eot",
+				"html/Logoin/layui/css/modules/layer/default/icon.png",
+				"html/JavaScript/mui.enterfocus.js",
+				"imgws/151375670204115466.png",
+				"img/65.jpg",
+				"img/44.jpg",
+				"img/69.jpg",
+				"SBie/js/Constants.js",
+				"js/feedback-page.js",
+				"html/js/jquery.gradientify.min.js",
+				"html/Video5/lang/ko.js",
+				"html/imgs/888.jpg",
+				"html/Share.html",
+				"html/Logoin/jbpic/image/4-2.jpg",
+				"html/Logoin/layui/css/global.css",
+				"images/mor.png",
+				"SBie/css/main.css",
+				"html/video-js/video.novtt.js",
+				"html/cssd/vue.min.js",
+				"html/imgs/7-6.jpg",
+				"html/Logoin/js/jquery.mockjax.js",
+				"html/Logoin/fonts/icomoon.ttf",
+				"html/Logoin/css/bootstrap.css",
+				"js/json2.js"
+			]
+		}
+	},
+	"unpackage": [
+		"Script/html5video.js"
+	]
+}

@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>列表到详情最佳实践</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">360新闻</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="tableView">
+			<div class="mui-card" v-for="item in news">
+				<div class="mui-card-header">
+					<label v-html="item.title">营业执照</label>
+				</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner mui-navigate-right" @tap="opendetail(item)" >
+						<p v-html="item.content"></p>
+						<div style="background:no-repeat;" v-for="url in item.imageUrls">
+							<img v-bind:src="url" style="width:100%;display:inline-block;height:auto;" />
+						</div>
+					</div>
+				</div>
+				<div class="mui-card-footer">
+					<h5>时间：<label v-html="item.publishDateStr"></label> 作者：<label v-html="item.posterScreenName"></label></h5>
+				</div>
+			</div>
+		    <div style="margin-bottom: 20px; text-align: center;"></div>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/shiquan.setting.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var vue = new Vue({
+				el: '#tableView',
+				data: {
+					news: [] //列表信息流数据
+				}
+			});	
+			//mui初始化，配置下拉刷新
+			mui.init({
+				pullRefresh: {
+					container: '#tableView',
+					down: {
+						style: 'circle',
+						offset: '0px',
+						auto: true,
+						callback: function() {
+							if(window.plus && plus.networkinfo.getCurrentType() === plus.networkinfo.CONNECTION_NONE) {
+								plus.nativeUI.toast('似乎已断开与互联网的连接', {
+									verticalAlign: 'top'
+								});
+								return;
+							}
+							pullRefreshDown();
+						}
+					},
+					up: {
+						height: 50,
+						auto: true,
+						contentrefresh: '正在加载...',
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: pullupRefresh
+					}
+				}
+			});
+			var loadData = false;
+			var hasNext = false;
+			var pageToken = "";
+			var keyword = "";
+			function pullRefreshDown(){
+				setTimeout(function(){
+					if(keyword == ""){
+						mui('#tableView').pullRefresh().endPulldown();
+						return;
+					}
+					if(loadData){
+						return;
+					}
+					//keyword = keyword || "新闻";
+					//请求列表信息流
+					let ajaxUrl = shiquan.SERVERURL+'/news/qihoo?apikey='+shiquan.APIKEY + "&site="+shiquan.SITE + "&kw="+keyword;
+					console.log("ajaxUrl="+ajaxUrl);
+					mui.ajax(ajaxUrl,{
+						data:{},
+						dataType:'json',//服务器返回json格式数据
+						type:'get',//HTTP请求类型
+						timeout:30000,//超时时间设置为10秒；
+						headers:{'Content-Type':'application/json'},	              
+						success:function(result){
+							mui('#tableView').pullRefresh().endPulldown();
+							if(result.retcode != "000000"){
+								plus.nativeUI.toast("读取失败："+result.message);
+								return;
+							}
+							console.log(JSON.stringify(result));
+							hasNext = result.hasNext;
+							pageToken = result.pageToken;
+							vue.news = result.data;
+						},
+						error:function(xhr,type,errorThrown){
+							mui('#tableView').pullRefresh().endPulldown();
+							//异常处理；
+							console.log("error:xhr="+xhr+" type="+type + " thrown="+errorThrown);
+						}
+					});
+				},1500);
+			};
+			
+			function pullupRefresh() {
+				setTimeout(function() {
+					console.log("hasNext:" + hasNext);
+					console.log("pageToken:" + pageToken);
+					mui('#tableView').pullRefresh().endPullup(hasNext == false); //参数为true代表没有更多数据了。
+					if(hasNext == false)
+						return;
+						
+					if(keyword == ""){
+						return;
+					}
+					//请求列表信息流
+					let ajaxUrl = shiquan.SERVERURL+'/news/qihoo?apikey='+shiquan.APIKEY + "&site="+shiquan.SITE + "&kw="+keyword+"&pageToken="+pageToken;
+					console.log("ajaxUrl="+ajaxUrl);
+					mui.ajax(ajaxUrl,{
+						data:{},
+						dataType:'json',//服务器返回json格式数据
+						type:'get',//HTTP请求类型
+						timeout:30000,//超时时间设置为10秒；
+						headers:{'Content-Type':'application/json'},	              
+						success:function(result){
+							mui('#tableView').pullRefresh().endPulldown();
+							if(result.retcode != "000000"){
+								plus.nativeUI.alert("读取失败："+result.message);
+								return;
+							}
+							console.log(JSON.stringify(result));
+							//vue.news = result.data;
+							hasNext = result.hasNext;
+							pageToken = result.pageToken;
+							result.data.forEach(function(item) {
+								vue.news.push(item);
+							});
+						},
+						error:function(xhr,type,errorThrown){
+							mui('#tableView').pullRefresh().endPulldown();
+							//异常处理；
+							console.log("error:xhr="+xhr+" type="+type + " thrown="+errorThrown);
+						}
+					});
+				}, 2000);
+			}
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				keyword = self.keyword;
+				document.getElementById("title").innerText = self.keyword || "暖宝";
+			});
+
+			/**
+			 * 打开新闻详情
+			 * 
+			 * @param {Object} item 当前点击的新闻对象
+			 */
+			function opendetail(item) {
+				mui.openWindow({ 
+					url: '360detail.html',
+					id: '360detail',
+					extras: {
+						title:item.title,
+						url: item.url
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

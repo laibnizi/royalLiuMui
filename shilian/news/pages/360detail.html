@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-close mui-pull-left"></a>
+			<h1 id="title" class="mui-title">实全科技</h1>
+		</header>
+		<script src="js/mui.min.js"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			//重写返回逻辑
+			mui.back = function() {
+				plus.webview.currentWebview().close();
+			}
+			//窗口隐藏时，重置页面数据
+			mui.plusReady(function () {
+				plus.nativeUI.showWaiting();
+				// 打开新窗口
+				let self = plus.webview.currentWebview();
+				document.getElementById("title").innerText = self.title || "实全科技";
+				var subPage = plus.webview.create(self.url, "subpage", {
+					top: '45px',bottom: '0px'
+				});
+				subPage.addEventListener('loaded', function() {
+					//console.log('New Window loaded!');
+					plus.nativeUI.closeWaiting();
+				}, false);
+				self.append(subPage);
+			})
+		</script>
+	</body>
+
+</html>

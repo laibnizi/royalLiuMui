@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="pages/css/mui.min.css" rel="stylesheet" />
+	<style type="text/css">
+		.mui-table-view-cell{
+			margin: 3px;
+			color:white;
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav" style="background-color:palevioletred;">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: green;"></a>
+	    <h1 class="mui-title">暖宝在你身边</h1>
+	</header>
+	<div class="mui-content">
+		<ul id="btnDefault" class="mui-table-view" style="margin-top: 10px;">
+			<!--<li class="mui-table-view-cell" style="background:rosybrown;">
+				<a class="mui-navigate-right">
+					财经
+				</a>
+			</li>-->
+			<li class="mui-table-view-cell"style="background:seagreen;">
+				<a class="mui-navigate-right">
+					科技
+				</a>
+			</li>
+			<li class="mui-table-view-cell"style="background:cadetblue;">
+				<a class="mui-navigate-right">
+					 财经
+				</a>
+			</li>
+			<li class="mui-table-view-cell"style="background:mediumslateblue;">
+				<a class="mui-navigate-right">
+					 体育
+				</a>
+			</li>
+			<li class="mui-table-view-cell"style="background:teal;">
+				<a class="mui-navigate-right">
+					 军事
+				</a>
+			</li>
+			<li class="mui-table-view-cell"style="background:orange;">
+				<a class="mui-navigate-right">
+					 文化
+				</a>
+			</li>
+			<li class="mui-table-view-cell"style="background:darkmagenta;">
+				<a class="mui-navigate-right">
+					 社会
+				</a>
+			</li>
+			<li class="mui-table-view-cell"style="background:violet;">
+				<a class="mui-navigate-right">
+					 娱乐
+				</a>
+			</li>
+			<li class="mui-table-view-cell"style="background:#007AFF;">
+				<a class="mui-navigate-right">
+					 游戏
+				</a>
+			</li>
+		</ul>
+		<div class="mui-table-view" style="margin-top: 10px;">
+			<div class="mui-input-row mui-search">
+				<input type="search" id="btnSearch" class="mui-input-clear" placeholder="搜索">
+			</div>
+		</div>
+		
+		<div style="margin-bottom: 10px; text-align: center;"></div>
+	</div>
+	<script src="pages/js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		mui.plusReady(function(){
+			mui('#btnDefault').on('tap', 'a', function() {
+				console.log(JSON.stringify(this.innerText));
+		        //打开新窗口
+		        let keyword = this;
+				mui.openWindow({ 
+					url: 'pages/360news.html',
+					id: '360news',
+					extras: {
+						keyword: this.innerText
+					}
+				});
+		    });
+		    
+		    let btnSetting = document.getElementById("btnSetting");
+		    btnSetting.addEventListener("tap",function(){
+		    	mui.openWindow("pages/setting.html","setting"); 
+		    });
+		    
+		    let btnSearch = document.getElementById("btnSearch");
+			btnSearch.addEventListener("keypress",function(event) {
+			    if(event.keyCode == "13") {
+			        document.activeElement.blur();//收起虚拟键盘
+			        mui.openWindow({ 
+						url: 'pages/360news.html',
+						id: '360news',
+						extras: {
+							keyword: String(btnSearch.value).trim()
+						}
+					});//TODO 完成搜索事件
+			        event.preventDefault(); // 阻止默认事件---阻止页面刷新
+			    }
+			});
+		});
+		
+	</script>
+</body>
+</html>

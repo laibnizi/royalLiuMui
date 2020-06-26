@@ -1,0 +1,42 @@
+* {  
+            margin: 0;  
+            padding: 0;  
+        }  
+  
+        .box {  
+            width: 300px;  
+            margin: 0 auto;  
+            border: 0px solid darkcyan;  
+            overflow: hidden;  
+        }  
+  
+        .animate {  
+            padding-left: 20px;  
+            font-size: 18px;  
+            color:lightseagreen;  
+            display: inline-block;  
+            white-space: nowrap;  
+            animation: 30s wordsLoop linear infinite normal;  
+        }  
+  
+        @keyframes wordsLoop {  
+            0% {  
+                transform: translateX(200px);  
+                -webkit-transform: translateX(200px);  
+            }  
+            100% {  
+                transform: translateX(-100%);  
+                -webkit-transform: translateX(-100%);  
+            }  
+        }  
+  
+        @-webkit-keyframes wordsLoop {  
+            0% {  
+                transform: translateX(200px);  
+                -webkit-transform: translateX(200px);  
+            }  
+            100% {  
+                transform: translateX(-100%);  
+                -webkit-transform: translateX(-100%);  
+            }  
+        }  

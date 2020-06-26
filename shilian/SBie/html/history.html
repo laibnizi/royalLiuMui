@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<link rel="stylesheet" href="../css/iconfont.css" />
+	</head>
+
+	<body>
+		<div class="history-content"  id="historyContent">
+		</div>
+		<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
+		    <!-- 可选择菜单 -->
+		    <ul class="mui-table-view">
+		      <li class="mui-table-view-cell"   id="modificationTitle">
+		        <a href="#">修改标题</a>
+		      </li>
+		      <li class="mui-table-view-cell"  id="deleteData">
+		        <a href="#">删除</a>
+		      </li>
+		    </ul>
+		    <!-- 取消菜单 -->
+		    <ul class="mui-table-view">
+		      <li class="mui-table-view-cell">
+		        <a href="#sheet1"><b>取消</b></a>
+		      </li>
+		    </ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/main.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				beforeback: function() {
+					if(plus.nativeObj.View.getViewById("view")){
+						plus.nativeObj.View.getViewById("view").close();
+					}
+				}
+			});
+			var showTag=false;//标识符
+			mui.plusReady(function(){
+				//获取所有的历史记录
+				getHistoryData();
+			
+				var htmlFontSize=plus.storage.getItem("htmlFontSize");
+				document.getElementsByTagName("html")[0].style.fontSize=htmlFontSize;
+				var statusBarHeight=0;
+				if(plus.navigator.isImmersedStatusbar()){
+					statusBarHeight=plus.navigator.getStatusbarHeight();
+				}
+				//绘制自定义的view
+				var view = new plus.nativeObj.View("view",{
+					backgroundColor:"#70ACF9",
+					width:"44px",
+					height:"40px",
+					top:statusBarHeight*1+"px",
+					left:"85%"
+				},[{
+					id:"drawText",
+					tag:"font",
+					text:"编辑",
+					textStyles:{
+						color:"#FFFFFF",
+					}
+				}]);
+				
+				/*
+				 * 其实这里 应该修改为   flex布局    这样可以省去很多麻烦
+				 */
+				view.addEventListener("touchstart",function(){
+					if(showTag){
+						for(var i=0;i<document.getElementsByClassName("del").length;i++){
+							document.getElementsByClassName("del")[i].style.display="none";
+						}
+						
+						for(var i=0;i<document.getElementsByClassName("text").length;i++){
+							document.getElementsByClassName("text")[i].style.left="1.2rem";
+							document.getElementsByClassName("time")[i].style.left="1.2rem";
+						}
+						view.drawText("编辑", null, {color:"#FFFFFF"},"drawText");
+						showTag=false;
+					}else{
+						for(var i=0;i<document.getElementsByClassName("del").length;i++){
+							document.getElementsByClassName("del")[i].style.display="block";
+						}
+						
+						for(var i=0;i<document.getElementsByClassName("text").length;i++){
+							document.getElementsByClassName("text")[i].style.left="1.5rem";
+							document.getElementsByClassName("time")[i].style.left="1.5rem";
+						}
+						
+						view.drawText("完成", null, {color:"#FFFFFF"},"drawText");
+						showTag=true;
+					}
+				});
+				view.show();
+			});
+			
+			
+			/*
+			 * 批量删除事件
+			 */
+			mui("#historyContent").on("tap",".del",function(s){
+				s.stopPropagation();
+				var title=this.nextElementSibling.nextElementSibling.innerHTML;
+				var key=this.parentNode.id.substring(8,this.parentNode.id.length);
+				plus.nativeUI.confirm("是否删除"+'“'+title+'”'+"？", function(e){
+					if(e.index==0){
+						deleteDataByKey(key);
+					}
+				}, "提示", ["确认","取消"]);
+			});
+			
+			/*
+			 * 编辑事件  无法遮住原生头部问题需要解决？
+			 * 	TODO
+			 */
+			var editKey="";
+			var editTitle="";
+			mui("#historyContent").on("tap",".edit",function(e){
+				e.stopPropagation();
+				mui('#sheet1').popover('toggle');
+				editKey=this.parentNode.id.substring(8,this.parentNode.id.length);
+				editTitle=this.previousElementSibling.previousElementSibling.innerHTML;
+			});
+			
+			//修改标题
+			document.getElementById("modificationTitle").addEventListener("tap",function(){
+				mui('#sheet1').popover('toggle');
+				plus.nativeUI.prompt(" ", function(e){
+					if(e.index==0){
+						var value=e.value;
+						modificationTitle(value);
+					}
+				}, "修改标题", "标题", ["确认","取消"] );
+			});
+			
+			//删除数据
+			document.getElementById("deleteData").addEventListener("tap",function(){
+				plus.nativeUI.confirm("是否删除"+'“'+editTitle+'”'+"？", function(e){
+					if(e.index==0){
+						deleteDataByKey(editKey);
+						mui('#sheet1').popover('toggle');
+					}
+				}, "提示", ["确认","取消"]);
+			});
+			
+			
+			//获取所有的历史记录
+			var db="";
+			function getHistoryData(){
+				if(!window.indexedDB){
+					document.getElementById("historyContent").innerHTML='<div  class="no-indexeddb"><span> 当前版本不支持indexedDB数据库<br />无法获取数据</span></div>';
+				}else{
+					var req=window.indexedDB.open(mainDB.name,mainDB.version);
+					req.onsuccess=function(e){
+						db=e.target.result;
+	      				var t = db.transaction(["history_record"],"readwrite");
+	      				var html="";
+	      				t.objectStore("history_record").openCursor().onsuccess=function(ee){
+	      					var res = ee.target.result;
+	      					if(!res){
+	      						if(html==""){
+	      							document.getElementById("historyContent").innerHTML='<div  class="no-indexeddb"><span>暂无数据</span></div>';
+	      							plus.nativeObj.View.getViewById("view").close();
+	      						}else{
+	      							document.getElementById("historyContent").innerHTML=html;
+	      						}
+	      					}else{
+	      						if(res){
+	      							html+=	'<div class="list-item"  id="listItem'+res.key+'">'+
+												'<div class="del"><span>-</span></div>'+
+												'<img src="'+plus.io.convertLocalFileSystemURL( res.value.imgURL ) +'"/>'+
+												'<div class="text">'+res.value.title+'</div>'+
+												'<div class="time">'+res.value.time+'</div>'+
+												'<div class="edit iconfont icon-caidan"></div>'+
+											'</div>';
+		      						res.continue();
+	      						}
+	      					}
+	      				};
+	      				t.objectStore("history_record").openCursor().onerror=function(ee){
+	      					document.getElementById("historyContent").innerHTML='<div  class="no-indexeddb"><span>获取数据错误</span></div>';
+	      				};
+	      				
+					};
+					req.onerror=function(e){
+						document.getElementById("historyContent").innerHTML='<div  class="no-indexeddb"><span>打开数据库错误</span></div>';
+					};
+					req.onupgradeneeded=function(e){
+						var thisDB=e.target.result;
+	      				if(!thisDB.objectStoreNames.contains("history_record")){//判断某个存储对象存不存在
+	      					var objectStore=thisDB.createObjectStore("history_record",{
+	                			autoIncrement: true
+	      					});
+	      				}
+					};
+				}
+			}
+			
+			
+			
+			//批量点击事件
+			mui("#historyContent").on("tap",".list-item",function(){
+				var key=this.id.substring(8,this.id.length);
+				var t = db.transaction(["history_record"], "readonly");
+				var store = t.objectStore("history_record");
+				var ob = store.get(key*1);
+				ob.onsuccess=function(e){
+					var imgURL=e.target.result.imgURL;
+					var time=e.target.result.time;
+					var title=e.target.result.title;
+					var formattingResponseText=e.target.result.result;
+					showWebView("result.html","result","识别结果",{
+						formattingResponseText:formattingResponseText,
+						key:key
+					});
+				};
+				ob.onerror=function(){
+					plus.nativeUI.toast("获取错误");
+				};
+			});
+			
+			
+			//删除数据
+			function deleteDataByKey(key){
+				if(window.indexedDB){
+					var req=window.indexedDB.open(mainDB.name,mainDB.version);
+					req.onsuccess=function(e){
+						var db=e.target.result;
+						var t=db.transaction(["history_record"],"readwrite");
+						var sotre=t.objectStore("history_record");
+						var deleteRsult=sotre.delete(key*1);
+						deleteRsult.onsuccess=function(){
+							plus.nativeUI.toast("删除成功");
+							plus.nativeObj.View.getViewById("view").drawText("编辑", null, {color:"#FFFFFF"},"drawText");
+							showTag=false;
+							getHistoryData();
+						};
+						deleteRsult.onerror=function(){
+							plus.nativeUI.toast("删除失败");
+						};
+					};
+					req.onerror=function(){
+						plus.nativeUI.toast("删除失败");
+					};
+				}else{
+					//虽然没有意义 但还是写着
+					plus.nativeUI.toast("此版本不支持indexedDB数据库");
+				}
+			}
+			
+			
+			/*
+			 	修改标题
+			 * */
+			function modificationTitle(oldtitle){
+				if(window.indexedDB){
+					var req=window.indexedDB.open(mainDB.name,mainDB.version);
+					req.onsuccess=function(e){
+						var db=e.target.result;
+						var t=db.transaction(["history_record"],"readwrite");
+						var sotre=t.objectStore("history_record");
+						var getResult=sotre.get(editKey*1);
+						getResult.onsuccess=function(event){
+							var imgURL=event.target.result.imgURL;
+							var time=event.target.result.time;
+							var title=event.target.result.title;
+							var formattingResponseText=event.target.result.result;
+							var putResult=sotre.put({
+								imgURL:imgURL,
+								time:time,
+								title:oldtitle,
+								result:formattingResponseText
+							},editKey*1);
+							putResult.onsuccess=function(){
+								plus.nativeObj.View.getViewById("view").drawText("编辑", null, {color:"#FFFFFF"},"drawText");
+								showTag=false;
+								plus.nativeUI.toast("修改成功");
+								getHistoryData();
+							};
+							putResult.onerror=function(){
+								plus.nativeUI.toast("修改失败");
+							};
+						};
+						getResult.onerror=function(){
+							plus.nativeUI.toast("修改失败");
+						};
+					};
+					req.onerror=function(){
+						plus.nativeUI.toast("修改失败");
+					};
+				}else{
+					//虽然没有意义 但还是写着
+					plus.nativeUI.toast("此版本不支持indexedDB数据库");
+				}
+			}
+			
+		</script>
+	</body>
+
+</html>

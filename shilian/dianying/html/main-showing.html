@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet"/>
+	    <style>
+			html,
+			body {
+				background-color: #FFFFFF;
+			}
+			.wrap-search{
+				margin: 15px;
+				background: #E6E6E6;
+				height: 30px;
+				border-radius: 5px;
+				text-align: center;
+			}
+			.item-img{
+				width: 60px;
+				height: 90px;
+				margin-right: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="refreshContainer">
+			<div class="mui-scroll">
+				<ul id="movies" class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell" v-for="item in movies" @tap="open_detail(item)">
+						<img class="mui-pull-left item-img" :src="item.cover" />
+						<div class="mui-ellipsis dark-big">
+							{{item.title}}
+						</div>
+						<div class="mui-ellipsis">
+							<span class="gray-small">{{item.genres}}</span>&nbsp;
+							<span v-if="item.score>0" class="orange-small">{{item.score}}分</span>
+							<span v-else class="orange-small">暂无评分</span>
+						</div>
+						<div class="mui-ellipsis gray-small">
+							导演：{{item.directors}}
+						</div>
+						<div class="mui-ellipsis gray-small">
+							主演：{{item.casts}}
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+	      	//Vue数据
+			var data_movies = new Vue({
+				el: '#movies',
+				data: {
+					movies: []
+				}
+			});
+			var aniShow = {};
+			
+			//mui.init()  mui插件初始化
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+				pullRefresh: {
+					container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down: {
+						auto: false, //可选,默认false.首次加载自动下拉刷新一次
+						callback: refreshData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					},
+					up: {
+						height: 50, //可选.默认50.触发上拉加载拖动距离
+						auto: true, //可选,默认false.自动上拉加载一次
+						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: loadMoreData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+			//刷新数据，重新调用接口
+			function refreshData() {
+				//请求热映列表接口
+				mui.getJSON('https://api.douban.com/v2/movie/in_theaters', {
+					start:0,
+					count:10
+				}, function(resp) {
+					data_movies.movies.splice(0,data_movies.movies.length);
+					data_movies.movies = data_movies.movies.concat(convert(resp.subjects));
+					//结束下拉
+					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+					//下拉的操作，如果无更多信息后，调用结束上拉并且传true会禁用上拉。如果需要重新开启下拉，则需要刷新组件
+					mui('#refreshContainer').pullRefresh().refresh(true);
+				});
+			}
+			//请求下一页数据
+			function loadMoreData(){
+				//请求热映列表接口
+				mui.getJSON('https://api.douban.com/v2/movie/in_theaters', {
+					start:data_movies.movies.length,
+					count:10
+				}, function(resp) {
+					data_movies.movies = data_movies.movies.concat(convert(resp.subjects));
+					//结束上拉
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(data_movies.movies.length >= resp.total);//结束上拉
+				});
+			}
+			
+			var detailPage = null;
+			
+			//页面初始化
+			//在app开发中，若要使用HTML5+扩展api，必须等plusready事件发生后才能正常使用，
+			//mui将该事件封装成了mui.plusReady()方法，涉及到HTML5+的api，建议都写在mui.plusReady方法中
+			mui.plusReady(function(){
+				//Webview模块管理应用窗口界面，实现多窗口的逻辑控制管理操作。通过plus.webview可获取应用界面管理对象
+				//getWebviewById() 查找指定标识的WebviewObject窗口
+				detailPage = plus.webview.getWebviewById('movie-detail');
+				if(!detailPage){
+					//预加载电影详情页   通过mui.preload()方法预加载页面.
+					//在列表页中预加载详情页，列表页中点击某电影时，通过自定义事件通知详情页加载对应电影详情，
+					//这样可以避免每次打开电影详情时重新创建webview的资源消耗
+					detailPage = mui.preload({
+						id:'movie-detail.html',
+						url:'movie-detail.html'
+					});
+				}
+			});
+			
+			//打开电影详情页面
+			function open_detail(item){
+				//触发详情页面的movieId事件
+				//通过mui.fire()方法可以触发目标窗口的自定义事件
+				//mui.fire(目标窗口的webview,'自定义事件名',{参数列表});
+				mui.fire(detailPage, 'movieId', {
+					id : item.id
+				});
+				//打开电影详情页
+				mui.openWindow({
+					id : 'movie-detail.html'
+				});
+			}
+			
+			//数据转换
+			function convert(items) {
+				var newItems = [];
+				//遍历items
+				items.forEach(function(item) {
+					var genres = item.genres.toString().replace(/,/g, ' / ');
+					//导演
+					var directors = '';
+					for(var i = 0; i < item.directors.length; i++) {
+						directors += item.directors[i].name;
+						if(i != item.directors.length - 1) {
+							directors += ' / ';
+						}
+					}
+					//演员
+					var casts = '';
+					for(var i = 0; i < item.casts.length; i++) {
+						casts += item.casts[i].name;
+						if(i != item.casts.length - 1) {
+							casts += ' / ';
+						}
+					}
+	
+					newItems.push({
+						id		  : item.id,
+						title	  : item.title,
+						genres	  : genres,
+						cover	  : item.images.large,
+						score	  : item.rating.average,
+						directors : directors,
+						casts	  : casts
+					});
+				});
+	
+				return newItems;
+			}
+		</script>
+	</body>
+
+</html>

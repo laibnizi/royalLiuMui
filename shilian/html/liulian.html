@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.iml{
+				height:100%;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" style="background-color: deepskyblue;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">在这生命里滚动</h1>
+		</header>
+		<div class="mui-content">
+		    
+		
+		<div id=demo style="height:300px;width:100%; overflow:hidden; ">
+			<div id=demo1>
+				<a href="" target="_blank" ><img src="../img/47.jpg"  class="iml"/></a>
+				<a href="" target="_blank" ><img src="../img/48.jpg"  class="iml"/></a>
+				<a href="" target="_blank" ><img src="../img/49.jpg"  class="iml"/></a>
+				<a href="" target="_blank" ><img src="../img/50.jpg"  class="iml"/></a>
+				<a href="" target="_blank" ><img src="../img/51.jpg"  class="iml"/></a>
+			</div>
+			<div id=demo2></div>
+			<script>
+				var speed = 10
+				demo2.innerHTML = demo1.innerHTML
+				demo.scrollTop = demo.scrollHeight
+
+				function Marquee() {
+					if(demo1.offsetTop - demo.scrollTop >= 0)
+						demo.scrollTop += demo2.offsetHeight
+					else {
+						demo.scrollTop--
+					}
+				}
+				var MyMar = setInterval(Marquee, speed)
+				demo.onmouseover = function() {
+					clearInterval(MyMar)
+				}
+				demo.onmouseout = function() {
+					MyMar = setInterval(Marquee, speed)
+				}
+			</script>
+		</div>
+		<p style="text-align:center;">会不会是我
+			<a href="http://www.16sucai.com/" target="_blank">.........</a>
+		</p>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,554 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			@charset "utf-8";
+			* {
+				margin: 0px;
+				padding: 0px;
+				box-sizing: border-box;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			}
+			
+			html {
+				max-width: 640px;
+				margin: 0 auto;
+			}
+			
+			body {
+				font-family: "PingFangSC-Regular", "sans-serif", "STHeitiSC-Light", "微软雅黑", "Microsoft YaHei";
+				font-size: 15px;
+				line-height: 1.5em;
+				color: #009E94;
+				-webkit-user-select: none;
+				user-select: none;
+				-webkit-touch-callout: none;
+				touch-callout: none;
+			}
+			
+			html,
+			body,
+			.page_box {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.page {
+				background: url(img/16010.jpg) repeat-y;
+				background-size: 100%;
+			}
+			
+			.page {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				overflow: hidden;
+			}
+			
+			.page.hide {
+				display: none;
+			}
+			/*==================================*/
+			
+			.page.inTop {
+				-webkit-animation: ShowTop .5s ease-out both;
+				animation: ShowTop .5s ease-out both;
+			}
+			
+			.page.outTop {
+				-webkit-animation: HideTop .5s ease-out both;
+				animation: HideTop .5s ease-out both;
+			}
+			
+			.page.inDown {
+				-webkit-animation: ShowDown .5s ease-out both;
+				animation: ShowDown .5s ease-out both;
+			}
+			
+			.page.outDown {
+				-webkit-animation: HideDown .5s ease-out both;
+				animation: HideDown .5s ease-out both;
+			}
+			
+			@-webkit-keyframes ShowTop {
+				0% {
+					-webkit-transform: translateY(100%);
+				}
+				100% {
+					-webkit-transform: translateY(0);
+				}
+			}
+			
+			@keyframes ShowTop {
+				0% {
+					transform: translateY(100%);
+				}
+				100% {
+					transform: translateY(0);
+				}
+			}
+			
+			@-webkit-keyframes HideTop {
+				0% {
+					-webkit-transform: translateY(0);
+				}
+				100% {
+					-webkit-transform: translateY(-100%);
+				}
+			}
+			
+			@keyframes HideTop {
+				0% {
+					transform: translateY(0);
+				}
+				100% {
+					transform: translateY(-100%);
+				}
+			}
+			
+			@-webkit-keyframes ShowDown {
+				0% {
+					-webkit-transform: translateY(-100%);
+				}
+				100% {
+					-webkit-transform: translateY(0);
+				}
+			}
+			
+			@keyframes ShowDown {
+				0% {
+					transform: translateY(-100%);
+				}
+				100% {
+					transform: translateY(0);
+				}
+			}
+			
+			@-webkit-keyframes HideDown {
+				0% {
+					-webkit-transform: translateY(0);
+				}
+				100% {
+					-webkit-transform: translateY(100%);
+				}
+			}
+			
+			@keyframes HideDown {
+				0% {
+					transform: translateY(0);
+				}
+				100% {
+					transform: translateY(100%);
+				}
+			}
+			/*==================================*/
+			
+			.arrow {
+				width: 70px;
+				height: 56px;
+				line-height: 56px;
+				text-align: center;
+				font-size: 27px;
+				font-weight: bold;
+				color: deepskyblue;
+				position: absolute;
+				left: 150px;
+				bottom: 10px;
+				-webkit-animation: arrow 1.2s .5s ease-in-out infinite;
+				animation: arrow 1.2s .5s ease-in-out infinite;
+			}
+			
+			@-webkit-keyframes arrow {
+				0% {
+					-webkit-transform: translateY(0);
+					opacity: 1;
+				}
+				100% {
+					-webkit-transform: translateY(-50%);
+					opacity: 0
+				}
+			}
+			
+			@keyframes arrow {
+				0% {
+					transform: translateY(0);
+					opacity: 1;
+				}
+				100% {
+					transform: translateY(-50%);
+					opacity: 0
+				}
+			}
+			/*==================================*/
+			
+			.page>div>div:nth-child(1) {
+				-webkit-animation: fadeRightTan .8s .2s ease-in-out both;
+				animation: fadeRightTan .8s .2s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(2) {
+				-webkit-animation: fadeRightTan .8s .7s ease-in-out both;
+				animation: fadeRightTan .8s .7s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(3) {
+				-webkit-animation: fadeRightTan .8s 1.2s ease-in-out both;
+				animation: fadeRightTan .8s 1.2s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(4) {
+				-webkit-animation: fadeRightTan .8s 1.7s ease-in-out both;
+				animation: fadeRightTan .8s 1.7s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(5) {
+				-webkit-animation: fadeRightTan .8s 2.2s ease-in-out both;
+				animation: fadeRightTan .8s 2.2s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(6) {
+				-webkit-animation: fadeRightTan .8s 2.7s ease-in-out both;
+				animation: fadeRightTan .8s 2.7s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(7) {
+				-webkit-animation: fadeRightTan .8s 3.2s ease-in-out both;
+				animation: fadeRightTan .8s 3.2s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(8) {
+				-webkit-animation: fadeRightTan .8s 4.7s ease-in-out both;
+				animation: fadeRightTan .8s 4.7s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(9) {
+				-webkit-animation: fadeRightTan .8s 5.2s ease-in-out both;
+				animation: fadeRightTan .8s 5.2s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(10) {
+				-webkit-animation: fadeRightTan .8s 5.7s ease-in-out both;
+				animation: fadeRightTan .8s 5.7s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(11) {
+				-webkit-animation: fadeRightTan .8s 6.2s ease-in-out both;
+				animation: fadeRightTan .8s 6.2s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(12) {
+				-webkit-animation: fadeRightTan .8s 6.7s ease-in-out both;
+				animation: fadeRightTan .8s 6.7s ease-in-out both;
+			}
+			
+			.page>div>div:nth-child(13) {
+				-webkit-animation: fadeRightTan .8s 7.2s ease-in-out both;
+				animation: fadeRightTan .8s 7.2s ease-in-out both;
+			}
+			
+			@-webkit-keyframes fadeRightTan {
+				0% {
+					-webkit-transform: translateX(100%);
+					opacity: 0;
+				}
+				70% {
+					-webkit-transform: translateX(-5%);
+					opacity: 1;
+				}
+				80% {
+					-webkit-transform: translateX(2%);
+					opacity: 1;
+				}
+				90% {
+					-webkit-transform: translateX(-2%);
+					opacity: 1;
+				}
+				100% {
+					-webkit-transform: translateX(0);
+					opacity: 1;
+				}
+			}
+			
+			@keyframes fadeRightTan {
+				0% {
+					transform: translateX(100%);
+					opacity: 0;
+				}
+				70% {
+					transform: translateX(-5%);
+					opacity: 1;
+				}
+				80% {
+					transform: translateX(2%);
+					opacity: 1;
+				}
+				90% {
+					transform: translateX(-2%);
+					opacity: 1;
+				}
+				100% {
+					transform: translateX(0);
+					opacity: 1;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="Wcss/musicAuto.css" />
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+
+		<header class="mui-bar mui-bar-nav" style="background-image:url(img/1611.jpg);">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" style="color: lightseagreen;">亦是万语</h1>
+		</header>
+		<div class="video_exist play_yinfu" id="audio_btn" style="display: block;z-index:999999;background-color:orangered;">
+			<div id="yinfu" class="rotate"></div>
+			<audio preload="auto" autoplay="" id="media" src="music/media/44.mp3" autoplay preload loop="loop"></audio>
+		</div>
+		<div class="page_box">
+			<div class="page page1">
+				<div>
+					<div>当两颗心开始震动 当你瞳孔学会闪躲 </div>
+					<div>当爱慢慢被遮住只剩下黑 距离像影子被拉拖</div>
+					<div>当爱的故事剩听说 我找不到你单纯的面孔</div>
+					<div>当生命每分每秒都为你转动 心多执著就加倍心痛</div>
+					<div>那些你很冒险的梦 我陪你去疯 折纸飞机 碰到雨天   终究会坠落</div>
+					<div>太残忍的话我直说 因为爱很重 你却不想懂 只往反方向走</div>
+					<div>我不想放手 你松开的左手 你爱的放纵 我白不回天空</div>
+					<div>我输了累了但你再也 不回头 </div>
+					<div>那些你很冒险的梦 我陪你去疯</div>
+					<div>折纸飞机 碰到雨天 终究会坠落 </div>
+					<div> 太残忍的话我直说 因为爱很重</div>
+					<div>你却不想懂 只往反方向走</div>
+					<div>你真的不懂 我的爱已降落 </div>
+				</div>
+			</div>
+
+			<div class="page page2 hide">
+				<div>
+					<div>鸳鸯双栖蝶双飞 满园春色惹人醉
+					</div>
+					<div>悄悄问圣僧 女儿美不美 女儿美不美.
+					</div>
+					<div>说什么王权富贵 怕什么戒律清规.
+					</div>
+					<div>只愿天长地久 与我意中人儿紧相随.
+					</div>
+					<div>爱恋伊 爱恋伊</div>
+					<div>愿今生常相随 愿今生常相随,
+					</div>
+					<div>鸳鸯双栖蝶双飞 满园春色惹人醉.
+					</div>
+					<div>悄悄问圣僧 女儿美不美 女儿美不美.
+					</div>
+					<div>说什么王权富贵 怕什么戒律清规.
+					</div>
+					<div>只愿天长地久
+					</div>
+					<div>与我意中人儿紧相随</div>
+					<div>　爱恋伊 爱恋伊</div>
+					<div>愿今生常相随.</div>
+				</div>
+			</div>
+
+			<div class="page page3 hide">
+				<div>
+					<div>走过了人来人往 不喜欢也得欣赏 </div>
+					<div>我是沉默的存在 不当你的世界 只作你肩膀</div>
+					<div>拒绝成长到成长 变成想要的模样
+					</div>
+					<div>在举手投降以前 让我再陪你一段
+					</div>
+					<div>陪你把沿路感想活出了答案
+					</div>
+					<div>陪伴是 最长情的告白</div>
+					<div>一次次失去又重来 我没离开
+					</div>
+					<div>陪你把想念的酸 拥抱成温暖
+					</div>
+					<div>陪你把独自孤单变成了勇敢</div>
+					<div>陪你把彷徨 写出情节来 未来多漫长</div>
+					<div> 再漫长 还有期待 陪伴你 一直到 故事给说完</div>
+					<div>让我们静静分享 此刻难得的坦白
+					</div>
+					<div>只是无声地交谈 都感觉幸福 感觉不孤单</div>
+
+				</div>
+			</div>
+
+			<div class="page page4 hide">
+				<div>
+					<div>如果没有遇见你 我将会是在哪里
+
+					</div>
+					<div>日子过得怎么样 人生是否要珍惜
+					</div>
+					<div>也许认识某一人 过着平凡的日子
+					</div>
+					<div>不知道会不会 也有爱情甜如蜜
+					</div>
+					<div>任时光匆匆流去 我只在乎你
+					</div>
+					<div>心甘情愿感染你的气息 人生几何能够得到知己
+					</div>
+					<div>失去生命的力量也不可惜 所以我求求你 别让我离开你
+					</div>
+					<div>除了你 我不能感到 一丝丝情意
+					</div>
+					<div>如果有那么一天 你说即将要离去
+					</div>
+					<div>我会迷失我自己 走入无边人海里 不要什么诺言
+					</div>
+					<div>只要天天在一起 我不能只依靠
+					</div>
+					<div>片片回忆活下去 任时光匆匆流去
+					</div>
+					<div>我只在乎你 心甘情愿感染你的气息
+					</div>
+				</div>
+			</div>
+
+			<div class="page page5 hide">
+				<div>
+					<div>如果痴痴的等某日 终于可等到一生中最爱
+
+						<div>谁介意你我这段情 每每碰上了意外 不清楚未来
+						</div>
+						<div>何曾愿意 我心中所爱 每天要孤单看海
+						</div>
+						<div>宁愿一生都不说话 都不想讲假说话欺骗你
+						</div>
+						<div>留意到你我这段情 你会发觉间隔着一点点距离
+						</div>
+						<div>无言地爱 我偏不敢说
+						</div>
+						<div>说一句想跟你一起</div>
+						<div>如真 如假 如可分身饰演自己
+						</div>
+						<div>会将心中的温柔 献出给你唯有的知己
+						</div>
+						<div>如痴 如醉 还盼你懂珍惜自己
+						</div>
+
+						<div>有天即使分离我都想你 我真的想你
+						</div>
+						<div>如果痴痴的等某日 终于可等到
+						</div>
+						<div>一生中 最爱</div>
+					</div>
+				</div>
+
+				<div class="page page6 hide">
+					<div>
+						<div>我从春天走来
+
+						</div>
+						<div>你在秋天说要分开</div>
+						<div>说好不为你忧伤 但心情怎会无恙
+						</div>
+						<div>为何总是这样 在我心中深藏着你
+						</div>
+						<div>想要问你想不想 陪我到地老天荒
+						</div>
+						<div>如果爱情这样忧伤 为何不让我分享
+						</div>
+						<div>你也不问你也不回答 怎么你会变这样
+						</div>
+						<div>想要问问你敢不敢</div>
+						<div>像你说过那样的爱我</div>
+						<div>想要问问你敢不敢 像我这样为爱痴狂
+						</div>
+						<div>想要问问你敢不敢 像你说过那样的爱我</div>
+						<div>像我这样为爱痴狂</div>
+						<div>到底你会怎么想</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="arrow">∧</div>
+
+			<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+			<script type="text/javascript">
+				//$('.page').height($(window).height());
+
+				document.addEventListener("touchmove", function(e) {
+					e.preventDefault();
+				}, false);
+
+				var curPage = 1;
+				var PageL = $('.page_box .page').length;
+				var canTouch = false;
+				canTouch = true;
+
+				var startY, endY, diff;
+				document.body.addEventListener("touchstart", touchStart, false);
+				document.body.addEventListener("touchmove", touchMove, false);
+				document.body.addEventListener("touchend", touchEnd, false);
+
+				function touchStart(e) {
+					var touch = e.touches[0];
+					startY = touch.pageY;
+				}
+
+				function touchMove(e) {
+					//e.preventDefault();
+					var touch = e.touches[0];
+					endY = touch.pageY;
+					diff = endY - startY;
+				}
+
+				function touchEnd(e) {
+					if(Math.abs(diff) > 150 && canTouch) {
+						if(diff > 0) {
+							if(curPage <= 1) {
+								return;
+							}
+
+							$('.page' + curPage).removeClass('inTop outTop inDown outDown hide').addClass('outDown');
+							curPage--;
+							$('.page' + curPage).removeClass('inTop outTop inDown outDown hide').addClass('inDown');
+
+						} else {
+							if(curPage >= PageL) {
+								return;
+							}
+
+							$('.page' + curPage).removeClass('inTop outTop inDown outDown hide').addClass('outTop');
+							curPage++;
+							$('.page' + curPage).removeClass('inTop outTop inDown outDown hide').addClass('inTop');
+
+							if(curPage >= PageL) {
+								$('.arrow').hide();
+							} else {
+								$('.arrow').show();
+							}
+						}
+						canTouch = false;
+						setTimeout(function() {
+							canTouch = true;
+							diff = 0;
+							$('.page' + (curPage - 1) + ', .page' + (curPage + 1)).addClass('hide');
+						}, 1000);
+					}
+				}
+			</script>
+	</body>
+	<script type="text/javascript" src="Wjs/musicAuto.js" ></script>
+
+</html>

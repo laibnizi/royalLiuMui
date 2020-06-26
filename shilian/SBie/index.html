@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+<body>
+	<div class="main-content">
+		<img src="img/logoimg.png"/>
+		<div class="main-title">将图片中的文字轻松识别出来</div>
+		<button class="btn-scanthing"  id="scanthingBtn">拍照识别</button>
+		<button class="btn-photo-album"  id="photoAlbumBtn">相册照片识别</button>	
+		<button class="btn-history"  id="historyBtn">历史记录</button>
+		<canvas id="photo" style="display: none;"></canvas>
+	</div>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/Constants.js" ></script>
+	<script type="text/javascript" src="js/main.js" ></script>
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+      	mui.plusReady(function(){
+      		if(plus.navigator.isImmersedStatusbar()&&plus.navigator.getStatusBarBackground()!="dark"){
+      			plus.navigator.setStatusBarStyle("dark");
+      		};
+			var htmlFontSize=( plus.screen.resolutionWidth * 10 )/ 36 + "px";         		
+			document.getElementsByTagName("html")[0].style.fontSize=htmlFontSize;
+			plus.storage.setItem("htmlFontSize", htmlFontSize);
+      	});
+      	/*
+      	 * 拍照识别
+      	 */
+      	document.getElementById("scanthingBtn").addEventListener("tap",function(){
+      		var cmr=plus.camera.getCamera(1);
+      		cmr.captureImage(function(capturedFile){
+      			if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_UNKNOW ||plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+      				plus.nativeUI.toast("网络异常");
+      				return;
+      			};
+      			plus.nativeUI.showWaiting("正在识别");
+      			plus.webview.currentWebview().setStyle({mask:"rgba(0,0,0,0.3)"});
+      			imageToBase64(capturedFile);     
+      		},function(e){
+      		});
+      	});
+      	/*
+      	 * 相册选取
+      	 */
+      	document.getElementById("photoAlbumBtn").addEventListener("tap",function(){
+      		plus.gallery.pick(function(file){
+      			plus.nativeUI.showWaiting("正在识别");
+      			plus.webview.currentWebview().setStyle({mask:"rgba(0,0,0,0.3)"});
+      			imageToBase64(file);
+      		},function(e){
+      			
+      		},{
+      			filter:"image",
+      			maximum:1,
+      			multiple:false
+      		});
+      	});
+      	
+      	/*
+      	 * 历史记录
+      	 */
+      	document.getElementById("historyBtn").addEventListener("tap",function(){
+      		showWebView("html/history.html","history","历史记录");
+      	});
+      	
+      	/*
+      	 *  获取 AccessToken
+      	 */
+      	function getAccessToken(imgURL,imgBase64){
+      		var authHost=Constants.AuthHost()+"?";
+      		var getAccessTokenUrl=authHost  
+      							// 1. grant_type为固定参数
+                				+ "grant_type="+Constants.GrantType()
+                				// 2. 官网获取的 API Key
+                				+ "&client_id=" + Constants.ApiKey()
+                				// 3. 官网获取的 Secret Key
+                				+ "&client_secret=" + Constants.SecretKey();
+           	var http=new  plus.net.XMLHttpRequest();
+			http.open("POST", getAccessTokenUrl);            
+            http.onreadystatechange = function () {
+            	if(http.readyState==4){
+            		if(http.status == 200 && http.responseText && JSON.parse(http.responseText).access_token){
+            			var access_token=JSON.parse(http.responseText).access_token;
+            			getTextByImage(access_token,imgURL,imgBase64);
+            		}else{
+            			plus.nativeUI.closeWaiting();
+            			plus.nativeUI.toast("获取access_token失败");
+            			plus.webview.currentWebview().setStyle({mask:"none"});
+            		}
+            	}
+			}
+            http.send();
+      	}
+      	
+      	
+      	/*
+      	 *	将 image 转成 base 64 字符串 
+      	 */
+      	function imageToBase64(capturedFile){
+      		var img=new Image();
+      		img.src=plus.io.convertLocalFileSystemURL( capturedFile );
+      		img.onload=function(){
+      			var width = img.width;//根据图片的宽高，将图片进行压缩
+        		var height = img.height;
+        		if(width > height) {
+		                height = Math.round(2500 * width / height);
+		                width = 2500;
+		        } else {
+		                width = Math.round(2500 * width / height);
+		                height = 2500;
+		        }
+        		var canvas = document.getElementById("photo");
+		        var cax = canvas.getContext('2d');
+		        canvas.width = width;
+		        canvas.height = height;
+		        cax.drawImage(img, 0, 0, width, height);//重绘
+		        var imgURL=capturedFile;
+		        var imgBase64 = canvas.toDataURL("image/png").split(",")[1];//dataUrl 即为base编码字符串
+		        getAccessToken(imgURL,imgBase64);
+      		}
+      	};
+      	
+      	
+      	/*
+      	 *  识别 图片
+      	 */
+      	function getTextByImage(access_token,imgURL,imgBase64){
+      		var params=encodeURIComponent("image")+"="+encodeURIComponent(imgBase64);
+      		var requestUrl=Constants.WebImageUrl()+"?access_token="+access_token;
+      		var http=new  plus.net.XMLHttpRequest();
+      		http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+      		http.setRequestHeader("Connection","Keep-Alive");
+      		http.onreadystatechange = function () {
+      			if( http.readyState == 4){
+      				if ( http.status == 200 ) {
+			            var responseText=http.responseText;
+			            //这里识别成功 打开indexDB  存入数据
+			            var date=new Date();
+			            var year=date.getFullYear();
+			            var month=date.getMonth();
+			            if(month*1<10)month="0"+month;
+			            var day=date.getDate();
+			            if(day*1<10)day="0"+day;
+			            var hours=date.getHours();
+			            if(hours*1<10)hours="0"+hours;
+			            var minutes=date.getMinutes();
+			            if(minutes*1<10)minutes="0"+minutes;
+			            var time=year+"-"+month+"-"+day+" "+hours+":"+minutes;
+			            createDB(imgURL,time,responseText,responseText);
+		            } else {
+		            	plus.nativeUI.closeWaiting();
+      					plus.webview.currentWebview().setStyle({mask:"none"});
+						plus.nativeUI.toast("识别错误，请重试");
+		            }
+      			}
+      		}
+			http.open("POST", requestUrl);    
+			http.send(params);
+      	}
+      	
+      	
+      	
+      	/*
+      	 * 	本地数据库存储
+      	 */
+      	function createDB(imgURL,time,responseText,responseText){
+      		if(!window.indexedDB){
+      			plus.nativeUI.toast("不支持DB数据库");
+      		}else{
+      			var	req=window.indexedDB.open(mainDB.name,mainDB.version);
+      			req.onsuccess=function(e){
+      				var db=e.target.result;
+      				var t = db.transaction(["history_record"],"readwrite");//创建一个数据库事物 再向数据库添加数据之前 必须向数据库添加事物  readonly（只读）和readwrite（读写）
+      				var store = t.objectStore("history_record");//获取执行的对象仓库
+      				
+      				//在将数据添加到数据库之前，要将数据进行格式化
+      				var formattingResponseText=formattingResponseTextFun(responseText);
+      				var addResult=store.add({
+      					imgURL:imgURL,
+      					time:time,
+      					title: formattingResponseText,
+      					result:formattingResponseText
+      				});
+      				addResult.onsuccess=function(e){
+      					var key=e.target.result;
+      					plus.nativeUI.closeWaiting();
+      					plus.webview.currentWebview().setStyle({mask:"none"});
+      					showWebView("html/result.html","result","识别结果",{
+			            	formattingResponseText:formattingResponseText,
+			            	key:key
+			            });
+      				};
+      				addResult.onerror=function(){
+      					plus.nativeUI.closeWaiting();
+      					plus.webview.currentWebview().setStyle({mask:"none"});
+      					plus.nativeUI.toast("添加失败");
+      				};
+      			};
+      			
+      			req.onerror=function(){
+      				plus.nativeUI.toast("打开数据库错误");
+      			};
+      			req.onupgradeneeded=function(e){
+      				var thisDB=e.target.result;
+      				if(!thisDB.objectStoreNames.contains("history_record")){//判断某个存储对象存不存在
+      					var objectStore=thisDB.createObjectStore("history_record",{
+                			autoIncrement: true
+      					});
+      				}
+      			};
+      		}
+      	};
+      	
+      	
+      	//格式化 识别后的结果数据
+      	function formattingResponseTextFun(responseText){
+      		if(responseText){
+				var responseJSON=JSON.parse(responseText);
+				if(responseJSON.words_result){
+					var text="";
+					var _tOP="";
+					for(var i=0;i<responseJSON.words_result.length;i++){
+						var top=responseJSON.words_result[i].location.top;
+						var words=responseJSON.words_result[i].words;
+						if(i==0){
+							text+=words;
+							_tOP=top;
+						}else{
+							if(top*1-_tOP*1>50){
+								text=text+"\r\n"+words;
+							}else{
+								text=text+"\t"+words;
+							}
+						}
+					}
+					return text;
+				}else{
+					return "";
+				}
+			}else{
+				return "";
+			}
+      	}
+    </script>
+</head>
+</body>
+</html>

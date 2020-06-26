@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>new webview</title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/jquery-1.11.3.js" ></script>
+		
+		
+		<script type="text/javascript" src="../js/util.js" ></script>
+		<style type="text/css">
+			.flex-container {
+				display: -webkit-flex;
+				display: flex;
+				-webkit-justify-content: space-around;
+				justify-content: space-around;
+				width: 100%;
+				height: 100px;
+				margin-top:7px;
+				background-color: lightslategrey;
+				/*background-image: url(../img/033.jpg);*/
+				position: relative;
+			}
+			.mui-navigate-right{
+				
+			}
+		</style>
+		<style type="text/css">
+
+			
+		
+			td,
+			th {
+				color: lightseagreen;
+				font-size: 18px;
+			}
+			
+			a {
+				font-size: 15px;
+				color:mediumturquoise;
+			}
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="font-size: 20px;color:#4CD964;background-image: url(../img/1010.jpg)">
+			
+			<span style="float:left;margin: 8px;">多想╮(￣▽￣)╭</span>
+			<h1 class="mui-title"style="color:green;font-size: 25px;">作你</h1>
+			<span style="float: right;margin: 8px;">☛肩膀</span>
+	
+		</header>
+		<div class="mui-content">
+			
+		   	  <div style="background-image: url(../img/16010.jpg); margin-top:4px; line-height:35px; width:100%;border-radius: 8px;">
+			<script>
+				var marqueeContent = new Array(); //滚动新闻
+				marqueeContent[0] = '<font color="lightseagreen"> 25 ♡            </font><a href=# target=_blank class="f12red">以爱之名    你还愿意吗</a><br>';
+				marqueeContent[1] = '<font color="lightseagreen"> 20 ☞            </font><a href=# target=_blank class="f12red">措不及防闯入你的笑颜</a><br>';
+				marqueeContent[2] = '<font color="lightseagreen"> 17 ♪            </font><a href=# target=_blank class="f12red">我曾将青春翻涌成她</a><br>';
+				marqueeContent[3] = '<font color="lightseagreen"> 45    ❦         </font><a href=# target=_blank class="f12red">心之所动   且就随缘去吧</a><br>';
+				var marqueeInterval = new Array(); //定义一些常用而且要经常用到的变量
+				var marqueeId = 0;
+				var marqueeDelay = 2000;
+				var marqueeHeight = 35;
+				//接下来的是定义一些要使用到的函数
+				function initMarquee() {
+					var str = marqueeContent[0];
+					document.write('<div id=marqueeBox style="overflow:hidden;height:' + marqueeHeight + 'px" onmouseover="clearInterval(marqueeInterval[0])" onmouseout="marqueeInterval[0]=setInterval(\'startMarquee()\',marqueeDelay)"><div>' + str + '</div></div>');
+					marqueeId++;
+					marqueeInterval[0] = setInterval("startMarquee()", marqueeDelay);
+				}
+
+				function startMarquee() {
+					var str = marqueeContent[marqueeId];
+					marqueeId++;
+					if(marqueeId >= marqueeContent.length) marqueeId = 0;
+					if(marqueeBox.childNodes.length == 1) {
+						var nextLine = document.createElement('DIV');
+						nextLine.innerHTML = str;
+						marqueeBox.appendChild(nextLine);
+					} else {
+						marqueeBox.childNodes[0].innerHTML = str;
+						marqueeBox.appendChild(marqueeBox.childNodes[0]);
+						marqueeBox.scrollTop = 0;
+					}
+					clearInterval(marqueeInterval[1]);
+					marqueeInterval[1] = setInterval("scrollMarquee()", 24);
+				}
+
+				function scrollMarquee() {
+					marqueeBox.scrollTop++;
+					if(marqueeBox.scrollTop % marqueeHeight == (marqueeHeight - 1)) {
+						clearInterval(marqueeInterval[1]);
+					}
+				}
+				initMarquee();
+			</script>
+		</div>
+		
+		
+
+		<script>
+			mui.init();
+			mui("body").on("tap", "#ChuangZuo", function() {
+				mui.openWindow({
+					id: 'ChuangZuo',
+					url: 'Video5/index.html'
+				})
+
+			});
+			mui("body").on("tap", "#xin", function() {
+				mui.openWindow({
+					id: 'xin',
+					url: 'xin.html'
+				})
+
+			});
+			mui("body").on("tap", "#KKK", function() {
+				mui.openWindow({
+					id: 'KKK',
+					url: 'KKK.html'
+				})
+
+			});
+				mui("body").on("tap", "#XK", function() {
+				mui.openWindow({
+					id: 'XK',
+					url: 'XingKONG.html' 
+				})
+
+			});
+			mui("body").on("tap", "#WZ", function() {
+				mui.openWindow({
+					id: 'WZ',
+					url: 'wenzi.html' 
+				})
+
+			});
+			mui("body").on("tap", "#zy", function() {
+				mui.openWindow({
+					id: 'zy',
+					url: 'zuoyou.html' 
+				})
+
+			});
+			mui("body").on("tap", "#qb", function() {
+				mui.openWindow({
+					id: 'qb',
+					url: 'qianbao.html' 
+				})
+
+			});
+			mui("body").on("tap", "#fab", function() {
+				mui.openWindow({
+					id: 'fab',
+					url: 'fabu.html' 
+				})
+
+			});
+				mui("body").on("tap", "#dy", function() {
+				mui.openWindow({
+					id: 'dy',
+					url: 'Dyou.html' 
+				})
+
+			});
+		</script>
+		
+		
+		<div id="" class="flex-container">
+
+				<div id="XK" style="text-align: center; height: 80px; width: 80px; border-color:solid 1px white;"><img src="../images/XingQ.png" style="align-content: center;margin:5px;" />
+					<span style="color:;"><b>星空</b></span>
+				</div>
+				<div id="WZ" style="text-align: center; height: 80px; width: 80px; border-color:solid 1px white;"><img src="../images/Chuang.png" style="align-content: center;margin: 5px;" />
+					<span style="color:;"><b>为你写诗</b></span>
+				</div>
+				<div id="xin" style="text-align: center; height: 80px; width: 80px;"><!--<img src="../images/AD.png" style="align-content: center;margin: 8px;" />-->
+					<span style="color: aquamarine;"><b>水莲洞</b></span>
+				<div id="container">
+  <canvas id="waterfall"></canvas>
+</div>
+<script type="text/javascript" src="js/indexfall.js" ></script>
+				</div>
+
+			</div>
+					<div style="height: 25px;background-color:;"></div>
+					<ul class="mui-table-view" style="background-color:;">
+					        <li class="mui-table-view-cell" id="zy">
+					            <a class="mui-navigate-right">
+					                <img src="../images/555.png" />
+					                <span style="margin-left: 20px;"><b>在你左右</b></span>
+					            </a>
+					        </li>
+					       <li class="mui-table-view-cell" id="qb">
+					            <a class="mui-navigate-right">
+					                <img src="../images/KaBao.png" />
+					                <span style="margin-left: 20px;">钱多多</span>
+					            </a>
+					        </li>
+					       
+					       <li class="mui-table-view-cell" id="telephone">
+					            <a class="mui-navigate-right">
+					                <img src="../images/TongCheng.png" />
+					                <span style="margin-left: 20px;">哪都有我</span>
+					            </a>
+					        </li>
+					      <li class="mui-table-view-cell" id="dy">
+					            <a class="mui-navigate-right" href="">
+					                <img src="../images/WuXing.png" />
+					                <span style="margin-left: 20px;">你的五星级</span>
+					            </a>
+					        </li>
+					       
+					    </ul>
+					    <div style="height: 25px;background-color:;"></div>
+					    <ul class="mui-table-view">
+					            
+					          <li class="mui-table-view-cell" id="fab">
+					            <a class="mui-navigate-right">
+					                <img src="../images/WaiMai.png" />
+					                <span style="margin-left: 20px;">风雨无阻</span>
+					            </a>
+					        </li>
+					        
+					          <li class="mui-table-view-cell" id="KKK">
+					            <a class="mui-navigate-right">
+					                <img src="../images/GongLv.png" />
+					                <span style="margin-left: 20px;">爱就一个字</span>
+					            </a>
+					        </li>
+					        </ul>
+					        </div>
+	</body>
+	<script type="text/javascript">
+		document.getElementById("telephone").addEventListener("tap", function() {
+			var btnArray = ['拨打', '取消'];
+			var phone = "13662107089";
+			mui.confirm('是否想我' + phone + '了', '提示', btnArray, function(e) {
+				if(e.index == 0) {
+					plus.device.dial(phone, false);
+				}
+			});
+		});
+	</script>
+</html>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>识别结果</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+	</head>
+
+	<body>
+		<textarea class="result-content"  id="resultConetnt">
+			
+		</textarea>
+		
+		
+		<!--  在滚动的同时 去除滚动条 -->
+		<div class="img-scroll-box"  id="imgScrollBox">
+			<div class="img-box">
+				<img src="../img/logoimg.png"   id="comparisonImg"  style="max-width: 800px;"/>
+			</div>
+		</div>
+		<div class="bottom-tab"  id="bottomTab">
+				<div class="item"  id="copy"  style="cursor: pointer;"   data-clipboard-action="copy" data-clipboard-target="#resultConetnt"><span class="iconfont icon-fuzhi"  style="font-size: 0.18rem;"></span><br /><span style="font-size: 0.14rem;">复制</span></div>
+				<div class="item"  id="export"><span class="iconfont icon-export"  style="font-size: 0.20rem;"></span><br /><span  style="font-size: 0.14rem;">保存</span></div>
+				<div class="item"  id="translate"><span class="iconfont icon-fanyi"  style="font-size: 0.20rem;"></span><br /><span  style="font-size: 0.14rem;">翻译</span></div>
+				<div class="item"  id="proofread"><span class="iconfont icon-jiaodui" style="font-size: 0.20rem;"></span><br /><span  style="font-size: 0.14rem;">校对</span></div>
+			</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/main.js" ></script>
+		<script type="text/javascript" src="../js/clipboard.min.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				beforeback: function() {
+					if(plus.nativeObj.View.getViewById("view")){
+						plus.nativeObj.View.getViewById("view").show();
+					}
+				}
+			});
+			var RESULT_DATA={};
+			mui.plusReady(function(){
+				// 弹出软键盘时自动改变webview的高度
+				if(mui.os.ios){
+					plus.webview.currentWebview().setStyle({
+				    	softinputMode: "adjustResize"  
+					});
+				}
+				var htmlFontSize=plus.storage.getItem("htmlFontSize");
+				document.getElementsByTagName("html")[0].style.fontSize=htmlFontSize;
+				
+				//关闭原生的view
+				if(plus.nativeObj.View.getViewById("view")){
+					plus.nativeObj.View.getViewById("view").hide();
+				}
+				
+				//获取传递的数据 并将数据封装
+				var self=plus.webview.currentWebview();
+				var formattingResponseText=self.formattingResponseText;
+				var key=self.key;
+				RESULT_DATA["key"]=key;
+				getDataByKey(key);
+				
+				//将获取到的数据显示在界面上
+				if(formattingResponseText){
+					document.getElementById("resultConetnt").value=formattingResponseText;
+				}else{
+					document.getElementById("resultConetnt").value="数据为空";
+				}
+				
+				//初始化粘贴板
+				var clipboard = new ClipboardJS('#copy');
+			    clipboard.on('success', function(e) {
+			        plus.nativeUI.toast("已成功复制到粘贴板");
+			    });
+			    clipboard.on('error', function(e) {
+			        plus.nativeUI.toast("复制失败");
+			    });
+			});
+			
+			
+			
+			//保存 这里执行的应该是更新操作
+			document.getElementById("export").addEventListener("tap",function(){
+				var req=window.indexedDB.open(mainDB.name,mainDB.version);
+				req.onsuccess=function(e){
+					var db=e.target.result;
+					var t=db.transaction(["history_record"],"readwrite");
+					var store=t.objectStore("history_record");
+					var putResult=store.put({
+						imgURL:RESULT_DATA.imgURL,
+						time:RESULT_DATA.time,
+						title:RESULT_DATA.title,
+						result:document.getElementById("resultConetnt").value
+					},RESULT_DATA.key*1);
+					putResult.onsuccess=function(){
+						plus.nativeUI.toast("更新成功");
+					};
+					putResult.onerror=function(){
+						plus.nativeUI.toast("上传失败");
+					}
+				};
+				req.onerr=function(){
+					plus.nativeUI.toast("打开数据库错误");
+				}
+			});
+			
+			//翻译
+			document.getElementById("translate").addEventListener("tap",function(){
+				showWebView("translate.html","translate","翻译",{text:document.getElementById("resultConetnt").value});
+			});
+			
+			// TODO 校对
+			document.getElementById("proofread").addEventListener("tap",function(){
+				var display=document.getElementById("imgScrollBox").style.display;
+				if(display=="block"){
+					document.getElementById("imgScrollBox").style.display="none";
+					document.getElementById("resultConetnt").style.bottom="0.5rem";
+					document.getElementById("proofread").style.color="#000000";
+				}else{
+					document.getElementById("imgScrollBox").style.display="block";
+					document.getElementById("resultConetnt").style.bottom="3.0rem";
+					document.getElementById("proofread").style.color="#70ACF9";
+				}
+			});
+			
+			
+			/*
+			 * 
+			 * 强制实现 软键盘弹出的时候 webview高度变化
+			 */
+			var originalHeight=document.documentElement.clientHeight || document.body.clientHeight;
+			window.onresize=function(){
+				var  resizeHeight=document.documentElement.clientHeight || document.body.clientHeight;
+				if(resizeHeight<originalHeight){
+					document.getElementById("bottomTab").style.display="none";
+					document.getElementById("resultConetnt").style.bottom="0rem";
+					
+				}else{
+					document.getElementById("bottomTab").style.display="flex";
+					document.getElementById("resultConetnt").style.bottom="0.5rem";
+					
+				}
+			}
+			
+			
+			//根据传递过来的key获取数据
+			function getDataByKey(key){
+				if(window.indexedDB){
+					var req=window.indexedDB.open(mainDB.name,mainDB.version);
+					req.onsuccess=function(e){
+						var db=e.target.result;
+						var t=db.transaction(["history_record"],"readonly");
+						var store=t.objectStore("history_record");
+						var getResult=store.get(key*1);
+						getResult.onsuccess=function(event){
+							var imgURL=event.target.result.imgURL;
+      						var time=event.target.result.time;
+      						var title=event.target.result.title;
+      						var result=event.target.result.result;
+      						RESULT_DATA["imgURL"]=imgURL;
+      						RESULT_DATA["time"]=time;
+      						RESULT_DATA["title"]=title;
+      						RESULT_DATA["result"]=result;
+      						document.getElementById("comparisonImg").src=plus.io.convertLocalFileSystemURL(imgURL);
+						};
+						getResult.onerror=function(){
+							plus.nativeUI.toast("获取数据错误");
+						}
+					};
+					req.onerror=function(){
+						plus.nativeUI.toast("打开数据库错误");
+					};
+				}else{
+					plus.nativeUI.toast("当前版本不支持indexedDB数据库");
+				}
+				
+			}
+		</script>
+	</body>
+
+</html>

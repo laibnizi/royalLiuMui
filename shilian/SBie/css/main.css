@@ -1,0 +1,276 @@
+.main-content {
+  position: absolute;
+  top: 0rem;
+  width: 100%;
+  height: 100%;
+  bottom: 0rem;
+  background-color: #FFFFFF;
+}
+.main-content img {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 1rem;
+}
+.main-content .main-title {
+  width: 90%;
+  height: 0.5rem;
+  margin: auto;
+  text-align: center;
+  line-height: 0.5rem;
+  color: #666666;
+  font-weight: 800;
+  font-size: 0.2rem;
+}
+.main-content .btn-scanthing {
+  display: block;
+  width: 90%;
+  height: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #70ACF9;
+  border: none;
+  color: #FFFFFF;
+  outline: none;
+  position: absolute;
+  bottom: 1.1rem;
+  left: 5%;
+  font-size: 0.18rem;
+}
+.main-content .btn-scanthing:active {
+  background-color: #70ACF9;
+  color: #999999;
+}
+.main-content .btn-photo-album {
+  display: block;
+  position: absolute;
+  width: 40%;
+  height: 0.5rem;
+  border-radius: 0.5rem;
+  left: 5%;
+  bottom: 0.3rem;
+  font-size: 0.18rem;
+  color: #70ACF9;
+  border: 1px solid #70ACF9;
+}
+.main-content .btn-photo-album:active {
+  background-color: #FFFFFF;
+  color: #EEEEEE;
+}
+.main-content .btn-history {
+  display: block;
+  position: absolute;
+  width: 40%;
+  height: 0.5rem;
+  border-radius: 0.5rem;
+  right: 5%;
+  bottom: 0.3rem;
+  font-size: 0.18rem;
+  color: #70ACF9;
+  border: 1px solid #70ACF9;
+}
+.main-content .btn-history:active {
+  background-color: #FFFFFF;
+  color: #EEEEEE;
+}
+.result-content {
+  position: absolute;
+  top: 0.0rem;
+  width: 100%;
+  bottom: 0.5rem;
+  overflow-y: scroll;
+  background-color: #DDDDDD;
+  border: none;
+  padding-left: 0.05rem;
+  line-height: 0.30rem;
+  outline: none;
+  resize: none;
+  margin: 0rem;
+}
+.img-scroll-box {
+  width: 100%;
+  height: 2.5rem;
+  position: absolute;
+  overflow: hidden;
+  background-color: black;
+  bottom: 0.50rem;
+  border-bottom: 1px solid #CCCCCC;
+  display: none;
+}
+.img-scroll-box .img-box {
+  width: 102%;
+  height: 103%;
+  overflow: scroll;
+}
+.bottom-tab {
+  width: 100%;
+  position: absolute;
+  height: 0.50rem;
+  bottom: 0.0rem;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: stretch;
+  padding-top: 0.05rem;
+}
+.bottom-tab .item {
+  flex-grow: 1;
+  flex-basis: 25%;
+  text-align: center;
+  line-height: 0.18rem;
+}
+.history-content {
+  position: absolute;
+  top: 0rem;
+  width: 100%;
+  height: 100%;
+  bottom: 0rem;
+  overflow-y: scroll;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+}
+.history-content .list-item {
+  width: 100%;
+  height: 1rem;
+  border-bottom: 0.01rem solid #EEEEEE;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+.history-content .list-item .del {
+  width: 0.3rem;
+  height: 100%;
+  float: left;
+  color: #FFFFFF;
+  display: none;
+}
+.history-content .list-item .del span {
+  text-align: center;
+  line-height: 0.16rem;
+  font-weight: 800;
+  font-size: 0.25rem;
+  display: inline-block;
+  width: 0.2rem;
+  height: 0.2rem;
+  background-color: red;
+  margin-top: 0.4rem;
+  margin-left: 0.1rem;
+  border-radius: 0.2rem;
+}
+.history-content .list-item img {
+  box-sizing: border-box;
+  width: 1rem;
+  height: 0.8rem;
+  display: block;
+  margin-top: 0.1rem;
+  margin-left: 0.1rem;
+  border: 1px solid #EEEEEE;
+  float: left;
+}
+.history-content .list-item .text {
+  position: absolute;
+  top: 0.1rem;
+  bottom: 0.5rem;
+  right: 0.1rem;
+  left: 1.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 0.16rem;
+  line-height: 0.2rem;
+}
+.history-content .list-item .time {
+  position: absolute;
+  width: auto;
+  height: auto;
+  left: 1.2rem;
+  bottom: 0.1rem;
+  font-size: 0.14rem;
+  color: #999999;
+}
+.history-content .list-item .edit {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.2rem;
+  bottom: 0.1rem;
+  right: 0.1rem;
+  font-size: 0.14rem;
+  color: #999999;
+  text-align: center;
+  line-height: 0.2rem;
+  font-size: 0.24rem;
+}
+.no-indexeddb {
+  text-align: center;
+  width: 100%;
+  height: 50px;
+  line-height: 25px;
+  margin-top: 50px;
+  color: #999999;
+}
+.translate-content {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  bottom: 0px;
+  background-color: #EEEEEE;
+}
+.translate-content .translate-original-text {
+  width: 100%;
+  height: 45%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.translate-content .translate-original-text textarea {
+  box-sizing: border-box;
+  width: 96%;
+  height: 96%;
+  margin: 2% auto;
+  background-color: #FFFFFF;
+  display: block;
+}
+.translate-content .translate-type {
+  width: 96%;
+  height: 10%;
+  margin: auto;
+}
+.translate-content .translate-type .flex-box {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.translate-content .translate-type .flex-box .selsect {
+  height: 0.4rem;
+  line-height: 0.4rem;
+  flex-basis: 70%;
+  display: block;
+  margin: 0px;
+  border: none;
+  color: #70ACF9;
+  text-align: center;
+  background-color: #FFFFFF;
+  border-radius: 0.02rem;
+}
+.translate-content .translate-type .flex-box button {
+  height: 0.4rem;
+  flex-basis: 25%;
+  display: block;
+  background-color: #70ACF9;
+  color: #FFFFFF;
+  border: none;
+}
+.translate-content .translate-result {
+  width: 100%;
+  height: 45%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.translate-content .translate-result textarea {
+  box-sizing: border-box;
+  width: 96%;
+  height: 96%;
+  margin: 2% auto;
+  background-color: #FFFFFF;
+  display: block;
+}
